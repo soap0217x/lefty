@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美業工作室 | 服務資訊</title>
+    <style>
+        /* --- 全域設定 --- */
+        :root {
+            --bg-color: #f9f9f9; /* 極淺灰底色 */
+            --card-bg: #ffffff;
+            --text-main: #333333; /* 深灰，比純黑溫柔 */
+            --text-sub: #666666;
+            --accent: #222222; /* 重點色 */
+            --border-radius: 12px;
+            --shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-top: 70px; /* 為了避開固定導航 */
+            padding-bottom: 80px; /* 為了避開底部按鈕 */
+        }
+
+        /* --- 1. 固定式導航 (Sticky Header) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow-x: auto; /* 允許橫向滑動 */
+            white-space: nowrap;
+            display: flex;
+            justify-content: center; /* 電腦版置中 */
+        }
+
+        /* 手機版導航優化 */
+        @media (max-width: 600px) {
+            .navbar {
+                justify-content: flex-start;
+                padding: 0 10px;
+            }
+        }
+
+        .nav-btn {
+            border: none;
+            background: none;
+            padding: 18px 20px;
+            font-size: 15px;
+            color: var(--text-sub);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background-color: var(--accent);
+            border-radius: 2px;
+        }
+
+        /* --- 2. 內容區塊 --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: none; /* 預設隱藏所有分頁 */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .container.active {
+            display: block; /* 顯示被選中的分頁 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 3. 卡片式設計 --- */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid #eeeeee;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+            letter-spacing: 1px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        p, li {
+            font-size: 14px;
+            color: var(--text-sub);
+            margin-bottom: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* 價目表樣式 */
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed #ddd;
+            padding: 12px 0;
+        }
+        .price-item:last-child {
+            border-bottom: none;
+        }
+        .price-val {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* --- 4. 底部聯繫按鈕 --- */
+        .footer-action {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-action:hover {
+            background: #000;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <button class="nav-btn active" onclick="openTab('pricing')">價目表</button>
+        <button class="nav-btn" onclick="openTab('booking')">預約須知</button>
+        <button class="nav-btn" onclick="openTab('precare')">術前準備</button>
+        <button class="nav-btn" onclick="openTab('postcare')">術後保養</button>
+        <button class="nav-btn" onclick="openTab('qa')">常見問題</button>
+    </nav>
+
+    <main id="pricing" class="container active">
+        <div class="card">
+            <div class="section-title">臉部護理 Facial</div>
+            <div class="price-item">
+                <span>深層清潔保濕</span>
+                <span class="price-val">$1,800</span>
+            </div>
+            <div class="price-item">
+                <span>抗老緊緻拉提</span>
+                <span class="price-val">$2,500</span>
+            </div>
+            <div class="price-item">
+                <span>煥膚亮白課程</span>
+                <span class="price-val">$2,200</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="section-title">睫毛/紋繡 Lash & Brow</div>
+            <div class="price-item">
+                <span>3D 自然款睫毛</span>
+                <span class="price-val">$1,200</span>
+            </div>
+            <div class="price-item">
+                <span>6D 濃密款睫毛</span>
+                <span class="price-val">$1,600</span>
+            </div>
+            <div class="price-item">
+                <span>霧眉設計 (含補色)</span>
+                <span class="price-val">$6,000</span>
+            </div>
+        </div>
+    </main>
+
+    <main id="booking" class="container">
+        <div class="card">
+            <div class="section-title">預約規則</div>
+            <ul>
+                <li><strong>訂金制度：</strong> 預約需預付訂金 $500，收到匯款才算預約成功。</li>
+                <li><strong>保留時間：</strong> 僅保留 15 分鐘，若遲到將自動取消或縮短服務時間，訂金不予退還。</li>
+                <li><strong>更改時間：</strong> 請於 3 天前告知，僅限更改一次。</li>
+                <li><strong>陪同限制：</strong> 為了維護服務品質與安靜環境，請勿攜帶男伴或寵物。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="section-title">付款方式</div>
+            <p>現場接受現金、轉帳、LinePay。</p>
+        </div>
+    </main>
+
+    <main id="precare" class="container">
+        <div class="card">
+            <div class="section-title">術前準備</div>
+            <p>為了達到最佳效果，請您協助配合以下事項：</p>
+            <ul>
+                <li>請素顏前來，若有化妝需預留卸妝時間。</li>
+                <li>建議穿著寬鬆舒適的衣物。</li>
+                <li>操作前 24 小時請避免飲酒或服用抗凝血藥物。</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="section-title">禁忌症狀</div>
+            <p>若您有以下狀況，請主動告知，我們可能無法為您服務：</p>
+            <ul>
+                <li>眼部或皮膚正處於發炎、過敏、傷口感染期。</li>
+                <li>懷孕初期（前三個月）或身體極度不適者。</li>
+                <li>近期有進行雷射或醫美手術者（需間隔 2 週以上）。</li>
+            </ul>
+        </div>
+    </main>
+
+    <main id="postcare" class="container">
+        <div class="card">
+            <div class="section-title">居家護理 Home Care</div>
+            <div class="post-care-item">
+                <h3>💧 關於碰水</h3>
+                <p>操作後 6 小時內請保持乾燥，洗臉時請避開施作部位，使用洗臉海綿輔助。</p>
+            </div>
+            <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
+            <div class="post-care-item">
+                <h3>🚫 避免行為</h3>
+                <p>一週內請避免游泳、三溫暖、烤箱或高溫瑜伽，以免影響留色或持久度。</p>
+            </div>
+            <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
+            <div class="post-care-item">
+                <h3>✨ 保養品使用</h3>
+                <p>請勿使用含酸類、美白成分之保養品塗抹於施作部位。若有結痂請勿摳抓，讓其自然脫落。</p>
+            </div>
+        </div>
+    </main>
+
+    <main id="qa" class="container">
+        <div class="card">
+            <div class="section-title">FAQ</div>
+            
+            <h3>Q：操作過程會痛嗎？</h3>
+            <p>A：我們會使用舒緩膏，每個人對痛感承受度不同，但大部分客人都覺得是可以接受的微刺感，甚至會睡著喔！</p>
+            <br>
+
+            <h3>Q：施作時間大約多久？</h3>
+            <p>A：依照項目不同，大約落在 1.5 ~ 2.5 小時之間（包含諮詢與前置作業）。</p>
+            <br>
+
+            <h3>Q：可以維持多久？</h3>
+            <p>A：依據個人代謝狀況與保養習慣，通常可維持 1~2 年不等（半永久紋繡）。</p>
+        </div>
+    </main>
+
+    <a href="https://line.me/ti/p/你的ID" target="_blank" class="footer-action">
+        立即預約 / 聯繫我們 (LINE)
+    </a>
+
+    <script>
+        function openTab(tabName) {
+            // 1. 隱藏所有內容區塊
+            var containers = document.getElementsByClassName("container");
+            for (var i = 0; i < containers.length; i++) {
+                containers[i].classList.remove("active");
+            }
+
+            // 2. 移除所有導航按鈕的 active 狀態
+            var navBtns = document.getElementsByClassName("nav-btn");
+            for (var i = 0; i < navBtns.length; i++) {
+                navBtns[i].classList.remove("active");
+            }
+
+            // 3. 顯示目標區塊並啟用對應按鈕
+            document.getElementById(tabName).classList.add("active");
+            
+            // 找到觸發此函數的按鈕並加上 active (透過遍歷對比)
+            // 這裡簡單處理：因為 onclick 是綁定在 button 上，我們可以使用 event.currentTarget
+            event.currentTarget.classList.add("active");
+            
+            // 切換時自動回到頁面頂端
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
