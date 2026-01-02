@@ -27,8 +27,8 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding-top: 70px; /* 為了避開固定導航 */
-            padding-bottom: 80px; /* 為了避開底部按鈕 */
+            padding-top: 60px;
+            padding-bottom: 100px; /* 避開底部雙按鈕高度 */
         }
 
         /* --- 1. 固定式導航 (Sticky Header) --- */
@@ -41,13 +41,12 @@
             backdrop-filter: blur(5px);
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            overflow-x: auto; /* 允許橫向滑動 */
+            overflow-x: auto;
             white-space: nowrap;
             display: flex;
-            justify-content: center; /* 電腦版置中 */
+            justify-content: center;
         }
 
-        /* 手機版導航優化 */
         @media (max-width: 600px) {
             .navbar {
                 justify-content: flex-start;
@@ -88,17 +87,42 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            display: none; /* 預設隱藏所有分頁 */
+            display: none;
             animation: fadeIn 0.5s ease;
         }
 
         .container.active {
-            display: block; /* 顯示被選中的分頁 */
+            display: block;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 形象主圖區塊 (Hero Image) --- */
+        .hero-banner {
+            width: 100%;
+            height: 250px;
+            /* 建議換成您作品集中最好看的一張飄眉照片 */
+            background-image: url('https://images.unsplash.com/photo-1620331313761-0d77180907d0?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-text {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
         }
 
         /* --- 3. 卡片式設計 --- */
@@ -120,21 +144,9 @@
             letter-spacing: 1px;
         }
 
-        h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-            color: var(--accent);
-        }
-
-        p, li {
-            font-size: 14px;
-            color: var(--text-sub);
-            margin-bottom: 10px;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
+        h3 { font-size: 16px; margin-bottom: 8px; color: var(--accent); }
+        p, li { font-size: 14px; color: var(--text-sub); margin-bottom: 10px; }
+        ul { padding-left: 20px; }
 
         /* 價目表樣式 */
         .price-item {
@@ -143,40 +155,49 @@
             border-bottom: 1px dashed #ddd;
             padding: 12px 0;
         }
-        .price-item:last-child {
-            border-bottom: none;
-        }
-        .price-val {
-            font-weight: bold;
-            color: var(--accent);
-        }
+        .price-item:last-child { border-bottom: none; }
+        .price-val { font-weight: bold; color: var(--accent); }
 
-        /* --- 4. 底部聯繫按鈕 --- */
-        .footer-action {
+        /* --- 4. 底部雙按鈕區塊 --- */
+        .footer-wrapper {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            max-width: 400px;
+            max-width: 500px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-btn {
+            flex: 1;
             background: var(--accent);
             color: white;
             text-align: center;
-            padding: 15px;
+            padding: 15px 0;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             text-decoration: none;
             font-weight: bold;
+            font-size: 14px;
             letter-spacing: 1px;
-            z-index: 1000;
+            transition: background 0.3s;
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
         }
-        
-        .footer-action:hover {
-            background: #000;
+
+        .footer-btn.ig {
+            background: #fff;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .footer-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
     </style>
@@ -192,35 +213,56 @@
     </nav>
 
     <main id="pricing" class="container active">
+        
+        <div class="hero-banner">
+            <span class="hero-text">SPECIALIST</span>
+        </div>
+
         <div class="card">
-            <div class="section-title">眉毛 Facial</div>
+            <div class="section-title">機器飄眉 Machine Hairstrokes</div>
+            
             <div class="price-item">
-                <span>深層清潔保濕</span>
-                <span class="price-val">$1,800</span>
+                <span>機器飄眉 (自然毛流感)</span>
+                <span class="price-val">$8,000</span> 
             </div>
+            
             <div class="price-item">
-                <span>抗老緊緻拉提</span>
-                <span class="price-val">$2,500</span>
+                <span>男士立體飄眉</span>
+                <span class="price-val">$9,000</span>
             </div>
+            
             <div class="price-item">
-                <span>煥膚亮白課程</span>
-                <span class="price-val">$2,200</span>
+                <span>絲霧眉 (飄眉+霧眉)</span>
+                <span class="price-val">$10,000</span>
+            </div>
+
+            <div class="price-item">
+                <span>三個月內補色</span>
+                <span class="price-val">免費/Free</span>
             </div>
         </div>
 
         <div class="card">
-            <div class="section-title">睫毛/紋繡 Lash & Brow</div>
+            <div class="section-title">無創除色 Tattoo Removal</div>
+            
             <div class="price-item">
-                <span>3D 自然款睫毛</span>
-                <span class="price-val">$1,200</span>
+                <span>無創除色 (單堂體驗)</span>
+                <span class="price-val">$3,000</span>
             </div>
+            
             <div class="price-item">
-                <span>6D 濃密款睫毛</span>
-                <span class="price-val">$1,600</span>
+                <span>眉尾/局部修正</span>
+                <span class="price-val">$1,500</span>
             </div>
+            
             <div class="price-item">
-                <span>霧眉設計 (含補色)</span>
-                <span class="price-val">$6,000</span>
+                <span>完整除色療程 (3堂包套)</span>
+                <span class="price-val">$8,000</span>
+            </div>
+
+             <div class="price-item">
+                <span>壞眉急救諮詢</span>
+                <span class="price-val">現場評估</span>
             </div>
         </div>
     </main>
@@ -232,7 +274,7 @@
                 <li><strong>訂金制度：</strong> 預約需預付訂金 $500，收到匯款才算預約成功。</li>
                 <li><strong>保留時間：</strong> 僅保留 15 分鐘，若遲到將自動取消或縮短服務時間，訂金不予退還。</li>
                 <li><strong>更改時間：</strong> 請於 3 天前告知，僅限更改一次。</li>
-                <li><strong>陪同限制：</strong> 為了維護服務品質與安靜環境，請勿攜帶男伴或寵物。</li>
+                <li><strong>陪同限制：</strong> 工作室空間有限，請勿攜帶男伴或寵物。</li>
             </ul>
         </div>
         <div class="card">
@@ -244,20 +286,20 @@
     <main id="precare" class="container">
         <div class="card">
             <div class="section-title">術前準備</div>
-            <p>為了達到最佳效果，請您協助配合以下事項：</p>
+            <p>為了讓留色與操作效果達到最佳，請協助配合：</p>
             <ul>
-                <li>請素顏前來，若有化妝需預留卸妝時間。</li>
-                <li>建議穿著寬鬆舒適的衣物。</li>
-                <li>操作前 24 小時請避免飲酒或服用抗凝血藥物。</li>
+                <li>操作前一晚請勿熬夜、飲酒，以免容易出血影響留色。</li>
+                <li>請素顏前來，若有上妝需預留時間卸妝。</li>
+                <li>建議穿著深色或領口寬鬆的衣物。</li>
+                <li>若有長期服用藥物或過敏體質請事先告知。</li>
             </ul>
         </div>
         <div class="card">
             <div class="section-title">禁忌症狀</div>
-            <p>若您有以下狀況，請主動告知，我們可能無法為您服務：</p>
             <ul>
-                <li>眼部或皮膚正處於發炎、過敏、傷口感染期。</li>
-                <li>懷孕初期（前三個月）或身體極度不適者。</li>
-                <li>近期有進行雷射或醫美手術者（需間隔 2 週以上）。</li>
+                <li>嚴重糖尿病、蟹足腫體質、凝血功能異常者。</li>
+                <li>懷孕初期、傳染性皮膚病、操作部位有開放性傷口。</li>
+                <li>近期有施打肉毒、填充物者建議間隔 2-4 週。</li>
             </ul>
         </div>
     </main>
@@ -266,18 +308,18 @@
         <div class="card">
             <div class="section-title">居家護理 Home Care</div>
             <div class="post-care-item">
-                <h3>💧 關於碰水</h3>
-                <p>操作後 6 小時內請保持乾燥，洗臉時請避開施作部位，使用洗臉海綿輔助。</p>
+                <h3>💧 清潔與保濕</h3>
+                <p>操作後 3-6 小時內建議保持乾燥。之後可用生理食鹽水濕敷清潔，薄擦修復霜。</p>
             </div>
             <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
             <div class="post-care-item">
-                <h3>🚫 避免行為</h3>
-                <p>一週內請避免游泳、三溫暖、烤箱或高溫瑜伽，以免影響留色或持久度。</p>
+                <h3>🚫 避免事項</h3>
+                <p>結痂脫落期（約 5-7 天）請勿摳抓，以免色料脫落。一週內避免三溫暖、游泳、大量流汗。</p>
             </div>
             <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
             <div class="post-care-item">
-                <h3>✨ 保養品使用</h3>
-                <p>請勿使用含酸類、美白成分之保養品塗抹於施作部位。若有結痂請勿摳抓，讓其自然脫落。</p>
+                <h3>✨ 除色後特別注意</h3>
+                <p>除色後皮膚較脆弱，請加強防曬與保濕，避免使用美白或酸類產品刺激。</p>
             </div>
         </div>
     </main>
@@ -285,46 +327,40 @@
     <main id="qa" class="container">
         <div class="card">
             <div class="section-title">FAQ</div>
-            
-            <h3>Q：操作過程會痛嗎？</h3>
-            <p>A：我們會使用舒緩膏，每個人對痛感承受度不同，但大部分客人都覺得是可以接受的微刺感，甚至會睡著喔！</p>
+            <h3>Q：機器飄眉會痛嗎？</h3>
+            <p>A：我們會敷舒緩膏，機器操作手法輕柔，大部分客人感覺像電動牙刷震動，痛感極低。</p>
             <br>
-
-            <h3>Q：施作時間大約多久？</h3>
-            <p>A：依照項目不同，大約落在 1.5 ~ 2.5 小時之間（包含諮詢與前置作業）。</p>
+            <h3>Q：飄眉跟霧眉有什麼不同？</h3>
+            <p>A：飄眉是模擬真實毛流感，像真的眉毛一樣；霧眉則是像刷了眉粉的妝感。我們也提供綜合的「絲霧眉」。</p>
             <br>
-
-            <h3>Q：可以維持多久？</h3>
-            <p>A：依據個人代謝狀況與保養習慣，通常可維持 1~2 年不等（半永久紋繡）。</p>
+            <h3>Q：無創除色需要幾次？</h3>
+            <p>A：依據您原本眉毛的顏色深淺、色料性質而定。通常淺色改眉 1-2 次即可，深色或變色眉可能需要 3 次以上療程。</p>
         </div>
     </main>
 
-    <a href="https://line.me/ti/p/你的ID" target="_blank" class="footer-action">
-        立即預約 / 聯繫我們 (LINE)
-    </a>
+    <div class="footer-wrapper">
+        <a href="https://instagram.com/您的IG帳號" target="_blank" class="footer-btn ig">
+            Instagram
+        </a>
+        <a href="https://line.me/ti/p/您的LineID" target="_blank" class="footer-btn">
+            預約諮詢 (Line)
+        </a>
+    </div>
 
     <script>
         function openTab(tabName) {
-            // 1. 隱藏所有內容區塊
             var containers = document.getElementsByClassName("container");
             for (var i = 0; i < containers.length; i++) {
                 containers[i].classList.remove("active");
             }
 
-            // 2. 移除所有導航按鈕的 active 狀態
             var navBtns = document.getElementsByClassName("nav-btn");
             for (var i = 0; i < navBtns.length; i++) {
                 navBtns[i].classList.remove("active");
             }
 
-            // 3. 顯示目標區塊並啟用對應按鈕
             document.getElementById(tabName).classList.add("active");
-            
-            // 找到觸發此函數的按鈕並加上 active (透過遍歷對比)
-            // 這裡簡單處理：因為 onclick 是綁定在 button 上，我們可以使用 event.currentTarget
             event.currentTarget.classList.add("active");
-            
-            // 切換時自動回到頁面頂端
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
