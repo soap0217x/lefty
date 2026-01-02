@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美業工作室 | 服務資訊</title>
+    <title>Lefty 美研所 | 服務資訊</title>
     <style>
         /* --- 全域設定 --- */
         :root {
-            --bg-color: #f9f9f9; /* 極淺灰底色 */
+            --bg-color: #f9f9f9;
             --card-bg: #ffffff;
-            --text-main: #333333; /* 深灰，比純黑溫柔 */
+            --text-main: #333333;
             --text-sub: #666666;
-            --accent: #222222; /* 重點色 */
+            --accent: #222222;
+            --sale-color: #b93c3c; /* 新增一個優惠紅字色 */
             --border-radius: 12px;
             --shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
         }
@@ -28,10 +29,10 @@
             color: var(--text-main);
             line-height: 1.6;
             padding-top: 60px;
-            padding-bottom: 100px; /* 避開底部雙按鈕高度 */
+            padding-bottom: 100px;
         }
 
-        /* --- 1. 固定式導航 (Sticky Header) --- */
+        /* --- 1. 固定式導航 --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -100,29 +101,66 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- 形象主圖區塊 (Hero Image) --- */
+        /* --- 新增：形象主圖與文字 --- */
         .hero-banner {
             width: 100%;
-            height: 250px;
-            /* 建議換成您作品集中最好看的一張飄眉照片 */
-            background-image: url('https://images.unsplash.com/photo-1620331313761-0d77180907d0?q=80&w=2070&auto=format&fit=crop'); 
+            height: 280px; /* 稍微加高一點放文字 */
+            /* 這裡讀取您上傳的照片，請確認檔名是否為 banner.jpg */
+            background-image: url('banner.jpg');
             background-size: cover;
             background-position: center;
             border-radius: var(--border-radius);
             margin-bottom: 25px;
             box-shadow: var(--shadow);
             position: relative;
+            /* 讓文字置中 */
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
+        }
+
+        /* 為了讓文字清楚，加一層半透明黑底遮罩 */
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4); /* 40% 透明度黑底 */
+            border-radius: var(--border-radius);
+            z-index: 1;
         }
         
-        .hero-text {
+        .hero-text-wrapper {
+            position: relative;
+            z-index: 2; /* 文字要在遮罩上面 */
             color: white;
-            font-size: 24px;
+            padding: 0 15px;
+        }
+
+        .event-title {
+            font-size: 28px;
             font-weight: bold;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
             letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .event-desc {
+            font-size: 16px;
+            margin-bottom: 5px;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .event-sub {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #eee;
         }
 
         /* --- 3. 卡片式設計 --- */
@@ -152,11 +190,36 @@
         .price-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             border-bottom: 1px dashed #ddd;
             padding: 12px 0;
         }
         .price-item:last-child { border-bottom: none; }
-        .price-val { font-weight: bold; color: var(--accent); }
+        
+        .price-val { 
+            font-weight: bold; 
+            color: var(--sale-color); /* 改成特價紅 */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* 原價刪除線樣式 */
+        .old-price {
+            text-decoration: line-through;
+            color: #aaa;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        /* 補色說明文字 */
+        .note-text {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
 
         /* --- 4. 底部雙按鈕區塊 --- */
         .footer-wrapper {
@@ -215,54 +278,45 @@
     <main id="pricing" class="container active">
         
         <div class="hero-banner">
-            <span class="hero-text">SPECIALIST</span>
+            <div class="hero-text-wrapper">
+                <h2 class="event-title">賀新年活動</h2>
+                <p class="event-desc">1/1 - 3/31 半永久紋繡項目 9 折優惠</p>
+                <p class="event-sub">✨ 兩人同行 各折扣 $1,000 / 人</p>
+            </div>
         </div>
 
         <div class="card">
             <div class="section-title">機器飄眉 Machine Hairstrokes</div>
             
             <div class="price-item">
-                <span>機器飄眉 (自然毛流感)</span>
-                <span class="price-val">$8,000</span> 
-            </div>
-            
-            <div class="price-item">
-                <span>男士立體飄眉</span>
-                <span class="price-val">$9,000</span>
-            </div>
-            
-            <div class="price-item">
-                <span>絲霧眉 (飄眉+霧眉)</span>
-                <span class="price-val">$10,000</span>
-            </div>
-
-            <div class="price-item">
-                <span>三個月內補色</span>
-                <span class="price-val">免費/Free</span>
+                <span>機器飄眉 (單次操作)</span>
+                <span class="price-val">
+                    <span class="old-price">$10,000</span>
+                    $9,000
+                </span>
             </div>
         </div>
 
         <div class="card">
-            <div class="section-title">無創除色 Tattoo Removal</div>
+            <div class="section-title">舊客補色 Touch-up</div>
+            <p class="note-text">
+                ※ 僅單次操作費用<br>
+                ※ 以第一次操作日期開始計算
+            </p>
             
             <div class="price-item">
-                <span>無創除色 (單堂體驗)</span>
-                <span class="price-val">$3,000</span>
+                <span>一年以內補色</span>
+                <span class="price-val" style="color:var(--text-main)">$3,000 / 單次</span>
             </div>
             
             <div class="price-item">
-                <span>眉尾/局部修正</span>
-                <span class="price-val">$1,500</span>
-            </div>
-            
-            <div class="price-item">
-                <span>完整除色療程 (3堂包套)</span>
-                <span class="price-val">$8,000</span>
+                <span>一年 ～ 二年以內補色</span>
+                <span class="price-val" style="color:var(--text-main)">$6,000 / 單次</span>
             </div>
 
-             <div class="price-item">
-                <span>壞眉急救諮詢</span>
-                <span class="price-val">現場評估</span>
+            <div class="price-item">
+                <span>二年以後</span>
+                <span class="price-val" style="color:var(--text-main)">以原定價計算</span>
             </div>
         </div>
     </main>
@@ -318,8 +372,8 @@
             </div>
             <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
             <div class="post-care-item">
-                <h3>✨ 除色後特別注意</h3>
-                <p>除色後皮膚較脆弱，請加強防曬與保濕，避免使用美白或酸類產品刺激。</p>
+                <h3>✨ 注意事項</h3>
+                <p>修復期間皮膚較脆弱，請加強物理防曬，避免使用美白或酸類產品刺激。</p>
             </div>
         </div>
     </main>
@@ -331,10 +385,10 @@
             <p>A：我們會敷舒緩膏，機器操作手法輕柔，大部分客人感覺像電動牙刷震動，痛感極低。</p>
             <br>
             <h3>Q：飄眉跟霧眉有什麼不同？</h3>
-            <p>A：飄眉是模擬真實毛流感，像真的眉毛一樣；霧眉則是像刷了眉粉的妝感。我們也提供綜合的「絲霧眉」。</p>
+            <p>A：飄眉是模擬真實毛流感，像真的眉毛一樣；霧眉則是像刷了眉粉的妝感。我們主打機器飄眉的自然質感。</p>
             <br>
-            <h3>Q：無創除色需要幾次？</h3>
-            <p>A：依據您原本眉毛的顏色深淺、色料性質而定。通常淺色改眉 1-2 次即可，深色或變色眉可能需要 3 次以上療程。</p>
+            <h3>Q：可以維持多久？</h3>
+            <p>A：依據個人代謝狀況，通常可維持 1~2 年不等。油性肌膚代謝可能會稍快一些。</p>
         </div>
     </main>
 
