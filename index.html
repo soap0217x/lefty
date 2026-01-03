@@ -3,563 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lefty 美研所 | 服務資訊</title>
+    <title>價目表 - Glow Beauty</title>
     <style>
-        /* --- 全域設定：溫柔簡約配色 --- */
         :root {
-            /* 背景改為極淡的暖米白，不那麼刺眼 */
-            --bg-color: #fcfbf9; 
-            --card-bg: #ffffff;
-            
-            /* 文字改為深炭灰，比純黑更柔和 */
-            --text-main: #4a4a4a;
-            --text-sub: #8c8c8c;
-            --text-title: #2b2b2b;
-
-            /* 重點色：低飽和度的奶茶色/裸棕色 */
-            --accent: #a69080; 
-            
-            /* 導覽列選取時的顏色 (深黑棕) */
-            --nav-active: #2b2b2b;
-
-            --border-radius: 16px;
-            --shadow: 0 8px 20px rgba(166, 144, 128, 0.08); /* 帶一點暖色的陰影 */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            /* 字體優化，增加間距讓閱讀更舒適 */
-            font-family: "Helvetica Neue", Helvetica, "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            --bg-color: #F8F6F2;
+            --card-bg: #FFFFFF;
+            --text-main: #4A403A;
+            --text-sub: #8C8C8C;
+            --accent-color: #A68E7C; /* 米棕色 */
+            --price-color: #4A403A;
+            --btn-black: #2C2C2C;
         }
 
         body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif;
             background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
             color: var(--text-main);
-            line-height: 1.7;
-            padding-top: 65px; /* 避開導航列 */
-            padding-bottom: 110px; /* 避開底部按鈕 */
-            letter-spacing: 0.05em; /* 微幅增加字距，提升質感 */
+            padding-bottom: 80px; /* 預留底部按鈕空間 */
         }
 
-        /* --- 1. 固定式導航 (更加通透簡約) --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(252, 251, 249, 0.9); /* 與背景同色系的半透明 */
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            box-shadow: 0 1px 0px rgba(0,0,0,0.03); /* 極細微的底線 */
-            overflow-x: auto;
-            white-space: nowrap;
+        /* 頂部導航 */
+        .nav-tabs {
             display: flex;
-            justify-content: center;
-            /* 隱藏滾動條 */
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        }
-        .navbar::-webkit-scrollbar { display: none; }
-
-        @media (max-width: 600px) {
-            .navbar {
-                justify-content: flex-start;
-                padding: 0 15px;
-            }
-        }
-
-        .nav-btn {
-            border: none;
-            background: none;
-            padding: 18px 18px;
+            justify-content: space-around;
+            background: var(--bg-color);
+            padding: 15px 0;
             font-size: 14px;
             color: var(--text-sub);
-            cursor: pointer;
-            transition: all 0.3s ease;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-item.active {
+            color: var(--text-main);
+            font-weight: bold;
             position: relative;
-            font-weight: 500;
         }
 
-        .nav-btn.active {
-            color: var(--nav-active);
-            font-weight: 700;
-        }
-
-        .nav-btn.active::after {
+        .nav-item.active::after {
             content: '';
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
+            display: block;
             width: 6px;
             height: 6px;
-            background-color: var(--accent);
-            border-radius: 50%; /* 改成一個小圓點，比線條更精緻 */
+            background-color: #Cebfb3;
+            border-radius: 50%;
+            margin: 4px auto 0;
         }
 
-        /* --- 2. 內容區塊 --- */
-        .container {
-            max-width: 600px; /* 縮小寬度讓手機閱讀更集中 */
-            margin: 0 auto;
-            padding: 15px;
-            display: none;
-            animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .container.active {
-            display: block;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- 圖片區塊 --- */
-        .hero-image {
-            width: 100%;
-            height: 220px;
-            background-color: #eee; /* 預設底色 */
-            background-image: url('banner.jpg'); 
-            background-size: cover;
-            background-position: center;
-            border-radius: var(--border-radius);
-            margin-bottom: 25px;
-            box-shadow: var(--shadow);
-            filter: brightness(0.95); /* 稍微壓暗一點點讓文字對比明顯，可視圖片調整 */
-        }
-
-        /* --- 活動區塊 (改為優雅的色塊風格) --- */
-        .event-banner {
-            background-color: #F2EBE5; /* 淺奶茶色背景 */
-            color: #594a42; /* 深棕色文字 */
-            padding: 30px 20px;
-            border-radius: var(--border-radius);
-            margin-bottom: 25px;
+        /* 優惠活動區塊 */
+        .event-card {
+            background-color: #F0EBE5;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* 裝飾線條，讓活動框看起來不單調 */
-        .event-banner::before {
-            content: "";
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 8px;
-            pointer-events: none;
         }
 
         .event-title {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: bold;
             margin-bottom: 8px;
-            letter-spacing: 2px;
+            color: #594A42;
         }
 
         .event-desc {
-            font-size: 16px;
-            margin-bottom: 5px;
-            font-weight: 500;
+            font-size: 14px;
+            color: #7A6E66;
+            margin-bottom: 12px;
         }
 
-        .event-sub {
-            font-size: 13px;
-            opacity: 0.8;
-            margin-top: 8px;
+        .event-tag {
             display: inline-block;
-            background: rgba(255,255,255,0.5);
-            padding: 2px 10px;
+            background-color: #FFFFFF;
+            padding: 4px 12px;
             border-radius: 20px;
+            font-size: 12px;
+            color: #A68E7C;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* --- 3. 卡片式設計 --- */
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-            border: none; /* 移除邊框，更乾淨 */
+        /* 項目列表容器 */
+        .service-list {
+            padding: 0 15px;
         }
 
-        /* --- 標題樣式 --- */
+        /* 手風琴卡片樣式 */
+        .accordion-item {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
         .accordion-header {
+            padding: 20px;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            user-select: none;
-            padding-bottom: 5px;
-        }
-        
-        .arrow-icon {
-            font-size: 12px;
-            color: var(--accent);
-            transition: transform 0.4s ease;
-        }
-        
-        .arrow-icon.rotate {
-            transform: rotate(180deg);
         }
 
-        .accordion-content {
-            display: none;
-            padding-top: 20px;
-            margin-top: 15px;
-            border-top: 1px dashed #eee;
-            color: var(--text-sub);
-            font-size: 14px;
-        }
-        
-        .accordion-content.show {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .section-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-title);
-            margin-bottom: 15px;
-            /* 改成左側小色塊裝飾，而非粗線條 */
+        .header-left {
             display: flex;
             align-items: center;
-            letter-spacing: 1.5px;
         }
-        
-        /* 標題前的小裝飾點 */
-        .section-title::before {
-            content: '';
-            display: inline-block;
+
+        .vertical-bar {
             width: 4px;
-            height: 16px;
-            background-color: var(--accent);
-            margin-right: 10px;
+            height: 18px;
+            background-color: #BCAAA4;
+            margin-right: 12px;
             border-radius: 2px;
         }
 
-        h3 { 
-            font-size: 15px; 
-            margin-bottom: 8px; 
-            color: var(--text-title); 
-            font-weight: 600;
-        }
-        
-        p, li { 
-            font-size: 14px; 
-            color: var(--text-sub); 
-            margin-bottom: 8px; 
-            text-align: justify; /* 讓文字左右對齊更整齊 */
-        }
-        
-        ul { 
-            padding-left: 20px; 
-            margin-bottom: 10px;
-        }
-        
-        li::marker {
-            color: var(--accent); /* 列表點點的顏色 */
+        .service-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
         }
 
-        .price-item {
+        .service-subtitle {
+            font-size: 13px;
+            color: var(--text-sub); /* 英文副標顏色 */
+            margin-left: 6px;
+            font-weight: normal;
+        }
+
+        .arrow-icon {
+            font-size: 12px;
+            color: #C4C4C4;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #fff;
+        }
+
+        .content-inner {
+            padding: 0 20px 25px 20px;
+            border-top: 1px solid #F5F5F5;
+        }
+
+        /* 價格樣式 */
+        .price-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #f5f5f5; /* 極細的底線 */
-            padding: 15px 0;
+            margin-top: 15px;
         }
-        .price-item:last-child { border-bottom: none; }
-        .price-item span:first-child {
+
+        .item-name {
+            font-size: 14px;
             color: var(--text-main);
-            font-weight: 500;
-        }
-        
-        .price-val { 
-            font-weight: 600; 
-            color: var(--text-title); 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
         }
 
-        .old-price {
-            text-decoration: line-through;
-            color: #ccc;
+        .price-group {
+            text-align: right;
+        }
+
+        .original-price {
             font-size: 12px;
-            font-weight: 400;
-            margin-bottom: 2px;
+            color: #B0B0B0;
+            text-decoration: line-through;
+            margin-right: 5px;
+            display: block;
         }
 
-        .note-text {
+        .current-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        /* 補色規則的小字 */
+        .note-box {
+            background-color: #F9F9F9;
+            padding: 12px;
+            border-radius: 8px;
             font-size: 12px;
             color: #999;
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
             margin-bottom: 15px;
+            line-height: 1.6;
+            margin-top: 15px;
         }
 
-        /* --- Footer (維持原本佈局，微調質感) --- */
-        .footer-wrapper {
+        /* 底部固定按鈕 */
+        .bottom-nav {
             position: fixed;
-            bottom: 25px; /* 稍微提高一點 */
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
             width: 90%;
-            max-width: 450px;
+            max-width: 400px;
             z-index: 1000;
-            display: flex;
-            gap: 12px;
         }
 
-        .footer-btn {
+        .btn-white {
             flex: 1;
-            background: var(--text-title); /* 深色按鈕 */
-            color: white;
+            background: #fff;
+            color: var(--text-main);
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
             text-align: center;
-            padding: 14px 0;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-            text-decoration: none;
-            font-weight: 500;
+        }
+
+        .btn-black {
+            flex: 1;
+            background: var(--btn-black);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 30px;
             font-size: 14px;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+            text-align: center;
         }
 
-        /* IG 按鈕改為白色底、深色字 */
-        .footer-btn.ig {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--text-title);
-            border: 1px solid #eee; /* 極淡邊框 */
-            backdrop-filter: blur(5px);
+        /* 開啟狀態 */
+        .accordion-item.open .arrow-icon {
+            transform: rotate(180deg);
         }
-
-        .footer-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* --- 針對 QA 的微調 --- */
-        .qa-box {
-            margin-bottom: 20px;
-        }
-        .qa-q {
-            color: var(--text-title);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        .qa-a {
-            color: var(--text-sub);
-            font-size: 14px;
+        .accordion-item.open .accordion-content {
+            max-height: 500px; /* 足夠展示內容的高度 */
         }
 
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <button class="nav-btn active" onclick="openTab('pricing')">價目表</button>
-        <button class="nav-btn" onclick="openTab('booking')">預約須知</button>
-        <button class="nav-btn" onclick="openTab('precare')">術前準備</button>
-        <button class="nav-btn" onclick="openTab('postcare')">術後保養</button>
-        <button class="nav-btn" onclick="openTab('qa')">常見問題</button>
-    </nav>
+    <div class="nav-tabs">
+        <div class="nav-item active">價目表</div>
+        <div class="nav-item">預約須知</div>
+        <div class="nav-item">術前準備</div>
+        <div class="nav-item">術後保養</div>
+    </div>
 
-    <main id="pricing" class="container active">
+    <div class="event-card">
+        <div class="event-title">New Year Event</div>
+        <div class="event-desc">1/1 - 3/31 半永久紋繡 9 折</div>
+        <div class="event-tag">✨ 兩人同行 各折 $1,000</div>
+    </div>
+
+    <div class="service-list">
         
-        <div class="hero-image">
-            </div>
-
-        <div class="event-banner">
-            <h2 class="event-title">New Year Event</h2>
-            <p class="event-desc">1/1 - 3/31 半永久紋繡 9 折</p>
-            <div class="event-sub">✨ 兩人同行 各折 $1,000</div>
-        </div>
-
-        <div class="card">
-            <div class="section-title accordion-header" onclick="toggleInfo()">
-                機器飄眉 Machine Hairstrokes
-                <span id="arrow" class="arrow-icon">▼</span>
-            </div>
-
-            <div class="price-item">
-                <span>單次操作</span>
-                <span class="price-val">
-                    <span class="old-price">$10,000</span>
-                    $9,000
-                </span>
-            </div>
-
-            <div id="machine-info" class="accordion-content">
-                <div style="margin-bottom: 15px;">
-                    <h3 style="color: var(--accent);">🤔 什麼是機器飄眉？</h3>
-                    <p>利用極細奈米針與數位機器，在皮膚表層刻畫出宛如真毛髮般的線條。相比傳統刀片，機器操作創傷更小、留色更穩定，呈現充滿空氣感的自然眉型。</p>
+        <div class="accordion-item open">
+            <div class="accordion-header" onclick="toggleItem(this)">
+                <div class="header-left">
+                    <div class="vertical-bar"></div>
+                    <span class="service-title">機器飄眉 <span class="service-subtitle">Machine Hairstrokes</span></span>
                 </div>
-                <div>
-                    <h3 style="color: var(--accent);">📝 操作流程 (約 2.5hr)</h3>
-                    <ul>
-                        <li><strong>專業諮詢：</strong>了解喜好與臉型分析。</li>
-                        <li><strong>眉型設計：</strong>量身繪製，確認滿意才施作。</li>
-                        <li><strong>舒緩定型：</strong>敷上舒緩膏，降低痛感。</li>
-                        <li><strong>機器操作：</strong>精細刻畫線條，過程舒適。</li>
-                        <li><strong>衛教說明：</strong>提供術後護理包與教學。</li>
-                    </ul>
+                <div class="arrow-icon">▼</div>
+            </div>
+            <div class="accordion-content" style="max-height: 500px;"> <div class="content-inner">
+                    <div class="price-row">
+                        <span class="item-name">單次操作</span>
+                        <div class="price-group">
+                            <span class="original-price">$10,000</span>
+                            <span class="current-price">$9,000</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="section-title">舊客補色 Touch-up</div>
-            <div class="note-text">
-                ※ 僅限本店舊客單次操作費用<br>
-                ※ 以第一次操作日期開始計算
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem(this)">
+                <div class="header-left">
+                    <div class="vertical-bar"></div>
+                    <span class="service-title">舊客補色 <span class="service-subtitle">Touch-up</span></span>
+                </div>
+                <div class="arrow-icon">▼</div>
             </div>
-            
-            <div class="price-item">
-                <span>一年以內</span>
-                <span class="price-val">$3,000</span>
-            </div>
-            
-            <div class="price-item">
-                <span>一年 ～ 二年</span>
-                <span class="price-val">$6,000</span>
-            </div>
-
-            <div class="price-item">
-                <span>二年以後</span>
-                <span class="price-val">原價計算</span>
-            </div>
-        </div>
-    </main>
-
-    <main id="booking" class="container">
-        <div class="card">
-            <div class="section-title">預約規則</div>
-            <ul>
-                <li><strong>訂金制度：</strong> 預約需預付訂金 $500，收到匯款才算預約成功。</li>
-                <li><strong>保留時間：</strong> 僅保留 15 分鐘，若遲到將自動取消或縮短服務時間，訂金不予退還。</li>
-                <li><strong>更改時間：</strong> 請於 3 天前告知，僅限更改一次。</li>
-                <li><strong>陪同限制：</strong> 工作室空間有限，請勿攜帶男伴或寵物。</li>
-            </ul>
-        </div>
-        <div class="card">
-            <div class="section-title">付款方式</div>
-            <p>現場接受現金、轉帳、LinePay。</p>
-        </div>
-    </main>
-
-    <main id="precare" class="container">
-        <div class="card">
-            <div class="section-title">術前準備</div>
-            <p>為了讓留色與操作效果達到最佳，請協助配合：</p>
-            <ul>
-                <li>操作前一晚請勿熬夜、飲酒，以免容易出血影響留色。</li>
-                <li>請素顏前來，若有上妝需預留時間卸妝。</li>
-                <li>建議穿著深色或領口寬鬆的衣物。</li>
-                <li>若有長期服用藥物或過敏體質請事先告知。</li>
-            </ul>
-        </div>
-        <div class="card">
-            <div class="section-title">禁忌症狀</div>
-            <ul>
-                <li>嚴重糖尿病、蟹足腫體質、凝血功能異常者。</li>
-                <li>懷孕初期、傳染性皮膚病、操作部位有開放性傷口。</li>
-                <li>近期有施打肉毒、填充物者建議間隔 2-4 週。</li>
-            </ul>
-        </div>
-    </main>
-
-    <main id="postcare" class="container">
-        <div class="card">
-            <div class="section-title">居家護理 Home Care</div>
-            
-            <div class="qa-box">
-                <h3>💧 清潔與保濕</h3>
-                <p>操作後 3-6 小時內建議保持乾燥。之後可用生理食鹽水濕敷清潔，薄擦修復霜。</p>
-            </div>
-            
-            <div class="qa-box">
-                <h3>🚫 避免事項</h3>
-                <p>結痂脫落期（約 5-7 天）請勿摳抓，以免色料脫落。一週內避免三溫暖、游泳、大量流汗。</p>
-            </div>
-            
-            <div class="qa-box">
-                <h3>✨ 注意事項</h3>
-                <p>修復期間皮膚較脆弱，請加強物理防曬，避免使用美白或酸類產品刺激。</p>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="note-box">
+                        ※ 僅限本店舊客單次操作費用<br>
+                        ※ 以第一次操作日期開始計算
+                    </div>
+                    
+                    <div class="price-row">
+                        <span class="item-name">一年以內</span>
+                        <div class="price-group">
+                            <span class="current-price">$3,000</span>
+                        </div>
+                    </div>
+                    <div class="price-row" style="margin-top: 15px;">
+                        <span class="item-name">一年 ～ 二年</span>
+                        <div class="price-group">
+                            <span class="current-price">$6,000</span>
+                        </div>
+                    </div>
+                    <div class="price-row" style="margin-top: 15px;">
+                        <span class="item-name">兩年以後</span>
+                        <div class="price-group">
+                            <span class="current-price">原價計算</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
 
-    <main id="qa" class="container">
-        <div class="card">
-            <div class="section-title">FAQ 常見問題</div>
-            
-            <div class="qa-box">
-                <div class="qa-q">Q：機器飄眉會痛嗎？</div>
-                <div class="qa-a">我們會敷舒緩膏，機器操作手法輕柔，大部分客人感覺像電動牙刷震動，痛感極低。</div>
+        <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleItem(this)">
+                <div class="header-left">
+                    <div class="vertical-bar"></div>
+                    <span class="service-title">無創除色 <span class="service-subtitle">Removal</span></span>
+                </div>
+                <div class="arrow-icon">▼</div>
             </div>
-            
-            <div class="qa-box">
-                <div class="qa-q">Q：飄眉跟霧眉有什麼不同？</div>
-                <div class="qa-a">飄眉是模擬真實毛流感，像真的眉毛一樣；霧眉則是像刷了眉粉的妝感。我們主打機器飄眉的自然質感。</div>
-            </div>
-
-            <div class="qa-box">
-                <div class="qa-q">Q：可以維持多久？</div>
-                <div class="qa-a">依據個人代謝狀況，通常可維持 1~2 年不等。油性肌膚代謝可能會稍快一些。</div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                     <div class="price-row">
+                        <span class="item-name">單次操作</span>
+                        <div class="price-group">
+                            <span class="current-price">$1,500</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
 
-    <div class="footer-wrapper">
-        <a href="https://instagram.com/您的IG帳號" target="_blank" class="footer-btn ig">
-            Instagram
-        </a>
-        <a href="https://line.me/ti/p/您的LineID" target="_blank" class="footer-btn">
-            預約諮詢
-        </a>
+    </div>
+
+    <div class="bottom-nav">
+        <button class="btn-white">Instagram</button>
+        <button class="btn-black">預約諮詢</button>
     </div>
 
     <script>
-        function openTab(tabName) {
-            var containers = document.getElementsByClassName("container");
-            for (var i = 0; i < containers.length; i++) {
-                containers[i].classList.remove("active");
-            }
-
-            var navBtns = document.getElementsByClassName("nav-btn");
-            for (var i = 0; i < navBtns.length; i++) {
-                navBtns[i].classList.remove("active");
-            }
-
-            document.getElementById(tabName).classList.add("active");
-            event.currentTarget.classList.add("active");
+        function toggleItem(header) {
+            const item = header.parentElement;
+            item.classList.toggle('open');
             
-            // 改為 smooth scroll 回到頂部
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleInfo() {
-            var infoDiv = document.getElementById("machine-info");
-            var arrow = document.getElementById("arrow");
-            
-            if (infoDiv.classList.contains("show")) {
-                infoDiv.classList.remove("show");
-                arrow.classList.remove("rotate");
+            // 處理內容高度動畫
+            const content = item.querySelector('.accordion-content');
+            if (item.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + "px";
             } else {
-                infoDiv.classList.add("show");
-                arrow.classList.add("rotate");
+                content.style.maxHeight = null;
             }
         }
     </script>
-
 </body>
 </html>
