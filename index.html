@@ -225,6 +225,8 @@
         .item-name {
             font-size: 15px;
             color: var(--text-main);
+            /* 修改這裡：加粗字體，跟價格數字一樣 */
+            font-weight: 600; 
         }
 
         .price-group {
@@ -367,7 +369,6 @@
             border: 1px solid #E0E0E0;
         }
 
-        /* 雖然 class 名稱還叫 btn-black 但為了不更動結構，我們在下面把它改成白色背景 */
         .btn-black {
             background: #fff; /* 改成白色 */
             color: var(--text-main); /* 字改成深色 */
@@ -494,7 +495,7 @@
                 <div class="accordion-content">
                     <div class="content-inner">
                         <div class="price-row">
-                            <span class="item-name">機器飄眉</span>
+                            <span class="item-name">單次操作</span>
                             <div class="price-group">
                                 <span class="original-price">$10,000</span>
                                 <span class="current-price">$9,000</span>
@@ -504,11 +505,11 @@
                         <div class="info-actions">
                             <div class="info-item">
                                 <button class="info-btn" onclick="toggleInfo(this)">
-                                    機器飄眉是什麼？
+                                    機器飄眉是什麼 
                                     <span class="btn-arrow"> ▼ </span>
                                 </button>
                                 <div class="info-detail">
-                                    機器飄眉就像是用最細的畫筆，在眉毛上做素描，模擬出跟真毛一樣的線條。我們使用精密儀器與奈米針具，輕柔地在皮膚表層操作出栩栩如生的毛流。
+                                    機器飄眉就像是用最細的畫筆，在眉毛上做素描，模擬出跟真毛一樣的線條。不同於傳統用刀片劃開皮膚，我們使用精密儀器與奈米針具，輕柔地在皮膚表層「點」出栩栩如生的毛流。
                                 </div>
                             </div>
 
@@ -520,22 +521,22 @@
                                 <div class="info-detail">
                                     機器飄眉是追求「原生感」的極致選擇：<br><br>
                                     <b>✨ 獨家優點：</b><br>
-                                    1. <b>仿真毛流</b>：宛如原生眉毛的細緻線條，素顏也能很有精神。<br>
-                                    2. <b>輕柔操作</b>：技術手法取代傳統方式，怕痛的你也能安心變美變帥。<br>
-                                    3. <b>零修復期</b>：做完即自然，隔天即可上班。<br>
-                                    4. <b>全膚質</b>：任何肌膚皆適用，留色度好。
+                                    1. <b>超自然</b>：線條蓬鬆立體，就像天生長出的眉毛。<br>
+                                    2. <b>超舒適</b>：操作輕柔無痛，過程放鬆好眠。<br>
+                                    3. <b>零尷尬</b>：做完即自然，可立即碰水洗臉，無粗黑結痂期。<br>
+                                    4. <b>全膚質</b>：油肌、敏感肌皆適用，留色持久不暈染。
                                 </div>
                             </div>
                             
                             <div class="info-item">
                                 <button class="info-btn" onclick="toggleInfo(this)">
-                                    操作流程 
+                                    操作流程 (約3小時)
                                     <span class="btn-arrow"> ▼ </span>
                                 </button>
                                 <div class="info-detail">
-                                    1. 填寫同意書<br>
-                                    2. 溝通了解想法與設計<br>
-                                    3. 毛流設計與操作<br>
+                                    1. 眉型溝通與設計 (30-40分)<br>
+                                    2. 敷舒緩膏 (20分)<br>
+                                    3. 機器操作上色 (90-120分)<br>
                                     4. 術後衛教說明<br>
                                     全程使用拋棄式一人一套耗材，安全衛生。
                                 </div>
@@ -650,10 +651,10 @@
 
     <div id="tab-notice" class="tab-content">
         <div class="text-page">
-            <h3>預約與訂金須知 <span class="en-title">Booking Policy</span></h3>
+            <h3>預約須知 <span class="en-title">Booking Policy</span></h3>
             <div class="content-box">
-                <p>1. 請務必準時抵達。<br>
-                   2. 若需改期請於兩天前告知。<br>
+                <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
+                   2. 若需改期請於三天前告知。<br>
                    3. 孕婦、蟹足腫體質請事先諮詢。</p>
             </div>
         </div>
@@ -674,8 +675,8 @@
         <div class="text-page">
             <h3>術後保養 <span class="en-title">After-care Instructions</span></h3>
              <div class="content-box">
-                <p>1. 術後4小時內請勿碰水。<br>
-                   2. 結痂期間4-7天請勿摳抓，可用乾紙巾輕拍。<br>
+                <p>1. 術後6小時內請勿碰水。<br>
+                   2. 結痂期間請勿摳抓。<br>
                    3. 每日早晚使用修復霜薄擦。</p>
             </div>
         </div>
