@@ -7,16 +7,15 @@
     <style>
         :root {
             /* 柔和黑白配色 */
-            --bg-color: #FAFAFA;       /* 背景：極淺灰白，不刺眼 */
-            --card-bg: #FFFFFF;        /* 卡片：純白 */
-            --text-main: #333333;      /* 主字：深炭灰，比純黑柔和 */
-            --text-sub: #666666;       /* 副字：中灰 */
-            --border-color: #E6E6E6;   /* 邊框：淺灰 */
-            --accent-color: #333333;   /* 重點色 */
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --text-main: #333333;
+            --text-sub: #666666;
+            --border-color: #E6E6E6;
             
-            /* 圓角設定：更圓潤 */
-            --radius-card: 24px;       /* 卡片圓角 */
-            --radius-btn: 50px;        /* 按鈕圓角 (全圓) */
+            /* 圓角設定 */
+            --radius-card: 24px;
+            --radius-btn: 50px;
         }
 
         body {
@@ -25,15 +24,15 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            padding-bottom: 110px; /* 底部空間 */
-            letter-spacing: 0.03em; /* 稍微增加字距，增加透氣感 */
+            padding-bottom: 110px;
+            letter-spacing: 0.03em;
         }
 
-        /* 1. 頂部導航 (可橫向滑動以容納更多項目) */
+        /* 導航 */
         .nav-tabs-container {
             position: sticky;
             top: 0;
-            background: rgba(250, 250, 250, 0.95); /* 毛玻璃效果 */
+            background: rgba(250, 250, 250, 0.95);
             backdrop-filter: blur(8px);
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
@@ -42,14 +41,13 @@
 
         .nav-tabs {
             display: flex;
-            overflow-x: auto; /* 允許橫向滑動 */
+            overflow-x: auto;
             white-space: nowrap;
             padding: 0 15px;
-            gap: 25px; /* 選單間距加大 */
-            -webkit-overflow-scrolling: touch; /* iOS 滑動優化 */
+            gap: 25px;
+            -webkit-overflow-scrolling: touch;
         }
         
-        /* 隱藏卷軸 */
         .nav-tabs::-webkit-scrollbar { display: none; }
 
         .nav-item {
@@ -59,7 +57,7 @@
             cursor: pointer;
             position: relative;
             transition: color 0.3s;
-            flex-shrink: 0; /* 防止擠壓 */
+            flex-shrink: 0;
         }
 
         .nav-item.active {
@@ -67,7 +65,6 @@
             font-weight: 500;
         }
 
-        /* 圓點指示器 (比底線更柔和) */
         .nav-item.active::after {
             content: '';
             position: absolute;
@@ -80,7 +77,7 @@
             border-radius: 50%;
         }
 
-        /* 頁面內容容器 */
+        /* 內容區塊 */
         .tab-content {
             display: none;
             padding: 20px 15px;
@@ -96,15 +93,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 優惠活動 Banner */
+        /* Banner */
         .event-card {
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
             padding: 25px;
             text-align: center;
             background-color: var(--card-bg);
-            border-radius: var(--radius-card); /* 圓潤導角 */
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* 極輕柔的陰影 */
+            border-radius: var(--radius-card);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
         .event-title {
@@ -126,46 +123,47 @@
             color: #fff;
             padding: 6px 16px;
             font-size: 12px;
-            border-radius: 50px; /* 膠囊狀 */
+            border-radius: 50px;
         }
 
-        /* 手風琴列表樣式 (卡片式) */
+        /* 手風琴列表 */
         .accordion-item {
             background-color: var(--card-bg);
-            border: 1px solid var(--border-color); /* 保留邊框 */
-            border-radius: var(--radius-card); /* 圓潤導角 */
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
             margin-bottom: 15px;
             overflow: hidden;
             transition: all 0.3s ease;
         }
 
-        /* 選中時邊框稍微加深，增加層次 */
         .accordion-item.open {
             border-color: #C0C0C0;
             box-shadow: 0 8px 25px rgba(0,0,0,0.04);
         }
 
         .accordion-header {
-            padding: 25px;
+            padding: 20px 25px;
             cursor: pointer;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            /* 修改這裡：讓左右兩邊分開 */
+            justify-content: space-between;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            flex-wrap: wrap; /* 允許小螢幕換行 */
+            /* 讓左側標題區可以縮放 */
+            flex: 1; 
         }
 
-        /* 標題前的裝飾線 (改為深灰圓角) */
         .vertical-bar {
             width: 4px;
             height: 18px;
             background-color: var(--text-main);
             margin-right: 15px;
             border-radius: 4px;
+            flex-shrink: 0;
         }
 
         .service-title {
@@ -173,28 +171,34 @@
             font-weight: 500;
             color: var(--text-main);
             display: flex;
-            align-items: baseline;
-            flex-wrap: wrap;
-        }
-
-        .service-note {
-            font-size: 13px;
-            font-weight: normal;
-            color: var(--text-sub);
-            margin-left: 8px;
+            flex-direction: column; /* 改為垂直排列讓 subtitle 在下方 */
+            line-height: 1.2;
         }
 
         .service-subtitle {
-            font-size: 13px;
+            font-size: 12px;
             color: #999;
-            margin-left: 8px;
             font-weight: normal;
+            margin-top: 2px;
+        }
+        
+        /* 新增：右側註記樣式 */
+        .header-right-note {
+            font-size: 12px;
+            color: var(--text-sub);
+            background-color: #F5F5F5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 10px; /* 與左側保持距離 */
+            margin-right: 10px; /* 與箭頭保持距離 */
+            white-space: nowrap; /* 防止文字換行 */
         }
 
         .arrow-icon {
             font-size: 12px;
             color: #BBB;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
         }
 
         .accordion-content {
@@ -205,10 +209,10 @@
 
         .content-inner {
             padding: 0 25px 30px 25px;
-            border-top: 1px solid #F5F5F5; /* 內容分隔線極淡 */
+            border-top: 1px solid #F5F5F5;
         }
 
-        /* 價格區塊 */
+        /* 價格與資訊按鈕 */
         .price-row {
             display: flex;
             justify-content: space-between;
@@ -221,11 +225,10 @@
             color: var(--text-main);
         }
 
-        /* 修改價格群組為垂直排列 */
         .price-group {
             display: flex;
-            flex-direction: column; /* 垂直堆疊 */
-            align-items: flex-end; /* 靠右對齊 */
+            flex-direction: column;
+            align-items: flex-end;
             text-align: right;
         }
 
@@ -233,8 +236,7 @@
             font-size: 12px;
             color: #CCC;
             text-decoration: line-through;
-            margin-bottom: 4px; /* 增加底部間距 */
-            margin-right: 0; /* 移除右側間距 */
+            margin-bottom: 4px;
         }
 
         .current-price {
@@ -243,7 +245,6 @@
             color: var(--text-main);
         }
 
-        /* 提示框 (改為更柔和的圓角與顏色) */
         .note-box {
             background-color: #F8F8F8;
             padding: 16px;
@@ -254,37 +255,67 @@
             line-height: 1.6;
         }
 
-        /* 資訊按鈕 (柔和黑白) */
         .info-actions {
             margin-top: 25px;
             display: flex;
+            flex-direction: column; /* 改為垂直排列以容納展開的內容 */
             gap: 12px;
+        }
+        
+        /* 資訊按鈕容器 */
+        .info-item {
+            width: 100%;
         }
 
         .info-btn {
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-decoration: none;
+            justify-content: space-between;
             background-color: #FFFFFF;
             color: var(--text-main);
             border: 1px solid #E0E0E0;
-            padding: 12px 0;
+            padding: 12px 15px;
             font-size: 13px;
-            border-radius: 12px; /* 稍微圓潤的按鈕 */
-            flex: 1;
+            border-radius: 12px;
+            cursor: pointer;
             transition: all 0.2s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
         }
 
         .info-btn:active {
             background-color: #F5F5F5;
-            transform: scale(0.98);
+            transform: scale(0.99);
+        }
+
+        /* 隱藏的詳細文字區塊 */
+        .info-detail {
+            display: none;
+            padding: 15px;
+            background-color: #F9F9F9;
+            border-radius: 0 0 12px 12px;
+            margin-top: -5px; /* 連接感 */
+            border: 1px solid #E0E0E0;
+            border-top: none;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .info-detail.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .btn-arrow {
-            margin-left: 6px;
-            font-size: 14px;
+            font-size: 10px;
             color: #999;
         }
 
@@ -310,27 +341,27 @@
             text-align: center;
             border-radius: var(--radius-btn);
             letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08); /* 柔和陰影 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
             transition: transform 0.2s;
+            border: none;
         }
 
         .btn-white {
             background: #fff;
             color: var(--text-main);
-            border: 1px solid #E0E0E0; /* 邊框更淡 */
+            border: 1px solid #E0E0E0;
         }
 
         .btn-black {
             background: var(--text-main);
             color: #fff;
-            border: none;
         }
 
         .btn-base:active {
             transform: scale(0.96);
         }
 
-        /* 支付方式樣式 (Tab內容) */
+        /* 支付方式 */
         .payment-card {
             background: #fff;
             border: 1px solid var(--border-color);
@@ -366,7 +397,7 @@
             color: var(--text-sub);
         }
 
-        /* 其他文字頁面 */
+        /* 文字頁面通用 */
         .text-page {
             line-height: 1.8;
             color: var(--text-sub);
@@ -375,25 +406,32 @@
         .text-page h3 {
             color: var(--text-main);
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 5px; /* 標題與副標間距 */
             font-size: 20px;
             font-weight: 500;
         }
         
-        /* 修改後的內容框樣式：跟支付方式卡片一致 */
+        .text-page .en-subtitle {
+            display: block;
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 25px;
+            font-weight: normal;
+            font-family: Arial, sans-serif;
+        }
+        
         .content-box {
-            background-color: #fff; /* 改為白底 */
-            border: 1px solid var(--border-color); /* 加入淺灰邊框 */
-            padding: 30px; /* 增加內距 */
-            border-radius: var(--radius-card); /* 使用相同的圓角 */
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: var(--radius-card);
             margin-bottom: 15px;
         }
         
         .content-box p {
-            margin: 0; /* 移除段落預設邊距 */
+            margin: 0;
         }
 
-        /* 狀態控制 */
         .accordion-item.open .arrow-icon {
             transform: rotate(180deg);
         }
@@ -403,7 +441,7 @@
 
     <div class="nav-tabs-container">
         <div class="nav-tabs">
-            <div class="nav-item active" onclick="switchTab('price')">價目表</div>
+            <div class="nav-item active" onclick="switchTab('price')">項目及價目表</div>
             <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
             <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
             <div class="nav-item" onclick="switchTab('care')">術後保養</div>
@@ -414,23 +452,22 @@
     <div id="tab-price" class="tab-content active">
         
         <div class="event-card">
-            <div class="event-title">New Year Event</div>
+            <div class="event-title">賀新年活動</div>
             <div class="event-desc">1/1 - 3/31 半永久紋繡 9 折</div>
-            <div class="event-tag">兩人同行 各折 $1,000</div>
+            <div class="event-tag">兩人同行 各折 $1,000/人</div>
         </div>
 
         <div>
-            
             <div class="accordion-item open">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="header-left">
                         <div class="vertical-bar"></div>
                         <span class="service-title">
                             機器飄眉 
-                            <span class="service-note">(含三個月內補色)</span>
                             <span class="service-subtitle">Hairstrokes</span>
                         </span>
                     </div>
+                    <div class="header-right-note">含三個月內補色</div>
                     <div class="arrow-icon">▼</div>
                 </div>
                 <div class="accordion-content">
@@ -442,10 +479,33 @@
                                 <span class="current-price">$9,000</span>
                             </div>
                         </div>
+                        
                         <div class="info-actions">
-                            <a href="#" class="info-btn">機器飄眉是什麼 <span class="btn-arrow">→</span></a>
-                            <a href="#" class="info-btn">操作流程 <span class="btn-arrow">→</span></a>
+                            <div class="info-item">
+                                <button class="info-btn" onclick="toggleInfo(this)">
+                                    機器飄眉是什麼 
+                                    <span class="btn-arrow"> ▼ </span>
+                                </button>
+                                <div class="info-detail">
+                                    使用新型數位機器與奈米針具，像素描一樣一根根刻畫出線條。與傳統紋繡相比，皮損極小、無結痂期（或僅有皮屑），後期留色自然不暈染，特別適合追求原生毛流感的顧客。
+                                </div>
+                            </div>
+                            
+                            <div class="info-item">
+                                <button class="info-btn" onclick="toggleInfo(this)">
+                                    操作流程 (約3小時)
+                                    <span class="btn-arrow"> ▼ </span>
+                                </button>
+                                <div class="info-detail">
+                                    1. 眉型溝通與設計 (30-40分)<br>
+                                    2. 敷舒緩膏 (20分)<br>
+                                    3. 機器操作上色 (90-120分)<br>
+                                    4. 術後衛教說明<br>
+                                    全程使用拋棄式一人一套耗材，安全衛生。
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -454,7 +514,10 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="header-left">
                         <div class="vertical-bar"></div>
-                        <span class="service-title">舊客補色 <span class="service-subtitle">Touch-up</span></span>
+                        <span class="service-title">
+                            舊客補色 
+                            <span class="service-subtitle">Touch-up</span>
+                        </span>
                     </div>
                     <div class="arrow-icon">▼</div>
                 </div>
@@ -484,7 +547,10 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="header-left">
                         <div class="vertical-bar"></div>
-                        <span class="service-title">無創除色 <span class="service-subtitle">Removal</span></span>
+                        <span class="service-title">
+                            無創除色 
+                            <span class="service-subtitle">Removal</span>
+                        </span>
                     </div>
                     <div class="arrow-icon">▼</div>
                 </div>
@@ -495,7 +561,15 @@
                             <div class="price-group"><span class="current-price">$1,500</span></div>
                         </div>
                         <div class="info-actions">
-                            <a href="#" class="info-btn">無創除色是什麼 <span class="btn-arrow">→</span></a>
+                            <div class="info-item">
+                                <button class="info-btn" onclick="toggleInfo(this)">
+                                    無創除色是什麼 
+                                    <span class="btn-arrow"> ▼ </span>
+                                </button>
+                                <div class="info-detail">
+                                    非雷射激光除色。利用物理性導出技術，溫和地將皮膚內的舊色料代謝出來。優點是不傷毛囊、不出血、不留疤，不影響眉毛生長。適合改眉前的底色處理。
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -506,7 +580,8 @@
 
     <div id="tab-payment" class="tab-content">
         <div class="text-page">
-            <h3>Payment Methods</h3>
+            <h3>支付方式</h3>
+            <span class="en-subtitle">Payment Methods</span>
             <p style="margin-bottom: 25px;">請於操作當日結清款項，目前提供以下方式：</p>
             
             <div class="payment-card">
@@ -531,6 +606,7 @@
     <div id="tab-notice" class="tab-content">
         <div class="text-page">
             <h3>預約須知</h3>
+            <span class="en-subtitle">Booking Policy</span>
             <div class="content-box">
                 <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
                    2. 若需改期請於三天前告知。<br>
@@ -542,6 +618,7 @@
     <div id="tab-prep" class="tab-content">
         <div class="text-page">
             <h3>術前準備</h3>
+            <span class="en-subtitle">Pre-care Instructions</span>
              <div class="content-box">
                 <p>1. 操作前一週請勿進行酸類煥膚。<br>
                    2. 前一晚請避免飲酒，保持充足睡眠。<br>
@@ -553,6 +630,7 @@
     <div id="tab-care" class="tab-content">
         <div class="text-page">
             <h3>術後保養</h3>
+            <span class="en-subtitle">After-care Instructions</span>
              <div class="content-box">
                 <p>1. 術後6小時內請勿碰水。<br>
                    2. 結痂期間請勿摳抓。<br>
@@ -567,9 +645,8 @@
     </div>
 
     <script>
-        // 切換 Tab 的功能
+        // 切換 Tab
         function switchTab(tabName) {
-            // 移除樣式
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
@@ -577,25 +654,15 @@
                 content.classList.remove('active');
             });
 
-            // 加上樣式
             const navItems = document.querySelectorAll('.nav-item');
-            // 更新了映射表以符合新的 Tab 順序
             const navMap = {
-                'price': 0, 
-                'notice': 1, 
-                'prep': 2, 
-                'care': 3,
-                'payment': 4
+                'price': 0, 'notice': 1, 'prep': 2, 'care': 3, 'payment': 4
             };
             
             if (navItems[navMap[tabName]]) {
                 navItems[navMap[tabName]].classList.add('active');
-                
-                // 自動將選中的標籤捲動到視野中央
                 navItems[navMap[tabName]].scrollIntoView({
-                    behavior: 'smooth',
-                    inline: 'center',
-                    block: 'nearest'
+                    behavior: 'smooth', inline: 'center', block: 'nearest'
                 });
             }
             
@@ -605,20 +672,47 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 手風琴收合功能
+        // 手風琴主選單
         function toggleAccordion(header) {
             const item = header.parentElement;
             item.classList.toggle('open');
             
             const content = item.querySelector('.accordion-content');
             if (item.classList.contains('open')) {
+                // 重新計算高度，包含內部可能已展開的資訊區
                 content.style.maxHeight = content.scrollHeight + "px";
             } else {
                 content.style.maxHeight = null;
             }
         }
 
+        // 內部資訊展開 (機器飄眉是什麼...)
+        function toggleInfo(btn) {
+            const detail = btn.nextElementSibling;
+            detail.classList.toggle('show');
+            
+            // 需要重新計算外層手風琴的高度，否則內容會被切掉
+            const parentContent = btn.closest('.accordion-content');
+            if (parentContent) {
+                // 先設為 none 讓它重算，再設為具體像素
+                parentContent.style.maxHeight = "none"; 
+                // 稍微延遲一下再鎖定高度（確保動畫順暢），或直接保留 none 讓它自適應
+                // 為了保留 transition 效果，通常需要計算，這裡簡單處理：
+                parentContent.style.maxHeight = parentContent.scrollHeight + "px";
+            }
+            
+            // 旋轉小箭頭
+            const arrow = btn.querySelector('.btn-arrow');
+            if(detail.classList.contains('show')) {
+                arrow.style.transform = 'rotate(180deg)';
+                arrow.style.display = 'inline-block';
+            } else {
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
+            // 初始化展開的項目高度
             const openItems = document.querySelectorAll('.accordion-item.open .accordion-content');
             openItems.forEach(content => {
                 content.style.maxHeight = content.scrollHeight + "px";
