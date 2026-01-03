@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>價目表 - Glow Beauty</title>
+    <title>Glow Beauty - 極簡黑白</title>
     <style>
         :root {
-            --bg-color: #F8F6F2;
+            /* 全站色調設定：純黑白 */
+            --bg-color: #FFFFFF;
             --card-bg: #FFFFFF;
-            --text-main: #4A403A;
-            --text-sub: #8C8C8C;
-            --accent-color: #A68E7C; 
-            --btn-black: #2C2C2C;
+            --text-main: #000000;
+            --text-sub: #555555;
+            --border-color: #E5E5E5; /* 極淺灰線條 */
+            --border-active: #000000; /* 選中時的黑線 */
         }
 
         body {
@@ -20,96 +21,112 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            padding-bottom: 90px;
+            padding-bottom: 100px;
         }
 
-        /* 頂部導航 */
+        /* 頂部導航 (Tabs) */
         .nav-tabs {
             display: flex;
-            justify-content: space-around;
-            background: var(--bg-color);
-            padding: 15px 0;
-            font-size: 14px;
-            color: var(--text-sub);
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 10px;
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(5px);
         }
 
         .nav-item {
-            text-decoration: none;
-            color: var(--text-sub);
-            padding-bottom: 5px;
+            flex: 1;
+            text-align: center;
+            padding: 18px 0;
+            font-size: 14px;
+            color: #999;
+            cursor: pointer;
             position: relative;
+            transition: color 0.3s;
         }
 
         .nav-item.active {
             color: var(--text-main);
-            font-weight: bold;
+            font-weight: 600;
         }
 
+        /* 黑色底線指示器 */
         .nav-item.active::after {
             content: '';
-            display: block;
-            width: 6px;
-            height: 6px;
-            background-color: #Cebfb3;
-            border-radius: 50%;
-            margin: 6px auto 0;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: #000;
         }
 
-        /* 優惠活動區塊 */
+        /* 頁面內容容器 (Tab Content) */
+        .tab-content {
+            display: none; /* 預設隱藏 */
+            padding: 20px 15px;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        .tab-content.active {
+            display: block; /* 顯示選中的頁面 */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 優惠活動 Banner (改為黑框白底) */
         .event-card {
-            background-color: #F0EBE5;
-            margin: 15px;
+            border: 1px solid #000;
+            margin-bottom: 25px;
             padding: 20px;
-            border-radius: 12px;
             text-align: center;
+            background-color: #FAFAFA;
         }
 
         .event-title {
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 8px;
-            color: #594A42;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .event-desc {
-            font-size: 14px;
-            color: #7A6E66;
-            margin-bottom: 12px;
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 15px;
         }
 
         .event-tag {
             display: inline-block;
-            background-color: #FFFFFF;
-            padding: 4px 12px;
-            border-radius: 20px;
+            background-color: #000;
+            color: #fff;
+            padding: 5px 15px;
             font-size: 12px;
-            color: #A68E7C;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            letter-spacing: 0.5px;
         }
 
-        /* 項目列表 */
-        .service-list {
-            padding: 0 15px;
-        }
-
+        /* 手風琴列表樣式 */
         .accordion-item {
             background-color: var(--card-bg);
-            border-radius: 16px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color); /* 改用底線分隔，更簡約 */
+            margin-bottom: 0;
         }
 
         .accordion-header {
-            padding: 20px;
+            padding: 25px 5px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            user-select: none;
         }
 
         .header-left {
@@ -117,43 +134,44 @@
             align-items: center;
         }
 
+        /* 標題前的裝飾線改為黑色 */
         .vertical-bar {
-            width: 4px;
-            height: 18px;
-            background-color: #BCAAA4;
-            margin-right: 12px;
-            border-radius: 2px;
+            width: 3px;
+            height: 16px;
+            background-color: #000;
+            margin-right: 15px;
         }
 
         .service-title {
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 500;
             color: var(--text-main);
+            letter-spacing: 0.5px;
         }
 
         .service-subtitle {
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-left: 6px;
+            font-size: 12px;
+            color: #888;
+            margin-left: 8px;
             font-weight: normal;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .arrow-icon {
-            font-size: 12px;
-            color: #C4C4C4;
+            font-size: 10px;
+            color: #000;
             transition: transform 0.3s ease;
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background-color: #fff;
+            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .content-inner {
-            padding: 0 20px 25px 20px;
-            border-top: 1px solid #F9F9F9;
+            padding: 0 10px 30px 22px; /* 稍微縮排 */
         }
 
         /* 價格區塊 */
@@ -166,7 +184,7 @@
 
         .item-name {
             font-size: 14px;
-            color: var(--text-main);
+            color: #333;
         }
 
         .price-group {
@@ -175,245 +193,325 @@
 
         .original-price {
             font-size: 12px;
-            color: #B0B0B0;
+            color: #BBB;
             text-decoration: line-through;
-            margin-right: 5px;
-            display: block;
+            margin-right: 8px;
         }
 
         .current-price {
             font-size: 16px;
-            font-weight: bold;
-            color: var(--text-main);
+            font-weight: 600;
+            color: #000;
         }
 
+        /* 提示框 (改為極淺灰底黑字) */
         .note-box {
-            background-color: #F9F9F9;
-            padding: 12px;
-            border-radius: 8px;
+            background-color: #F7F7F7;
+            padding: 15px;
             font-size: 12px;
-            color: #999;
-            margin-bottom: 15px;
-            line-height: 1.6;
-            margin-top: 15px;
+            color: #555;
+            margin: 15px 0;
+            line-height: 1.8;
+            border-left: 2px solid #000;
         }
 
-        /* 新增：資訊按鈕群組 */
+        /* 資訊按鈕 (黑框白底) */
         .info-actions {
-            margin-top: 20px;
+            margin-top: 25px;
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        /* 指定的 黑字白底 風格 */
         .info-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            background-color: #FFFFFF;
-            color: #000000; /* 黑字 */
-            border: 1px solid #E0E0E0; /* 淺灰邊框增加立體感 */
-            padding: 10px 16px;
-            border-radius: 8px;
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000; /* 黑框 */
+            padding: 12px 0;
             font-size: 13px;
             font-weight: 500;
-            flex: 1; /* 讓按鈕平均分配寬度 */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            transition: background 0.2s;
+            flex: 1;
+            transition: all 0.2s;
         }
 
         .info-btn:active {
-            background-color: #F5F5F5;
-            transform: translateY(1px);
+            background-color: #000;
+            color: #fff;
         }
 
-        /* 箭頭指示符號 */
         .btn-arrow {
-            margin-left: 6px;
-            font-size: 12px;
-            color: #999;
+            margin-left: 8px;
+            font-size: 14px;
         }
 
-        /* 底部固定按鈕 */
+        /* 底部按鈕 */
         .bottom-nav {
             position: fixed;
-            bottom: 20px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 15px;
-            width: 90%;
+            width: 85%;
             max-width: 400px;
             z-index: 1000;
         }
 
         .btn-white, .btn-black {
             flex: 1;
-            padding: 14px;
-            border-radius: 30px;
-            font-size: 14px;
+            padding: 16px;
+            font-size: 13px;
             font-weight: bold;
             cursor: pointer;
             text-align: center;
-            border: none;
+            border: 1px solid #000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .btn-white {
             background: #fff;
-            color: var(--text-main);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: #000;
         }
 
         .btn-black {
-            background: var(--btn-black);
+            background: #000;
             color: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        /* 開啟狀態 */
+        /* 支付方式圖標區 (簡單文字呈現) */
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .payment-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-icon {
+            width: 8px;
+            height: 8px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        /* 簡單的文字排版 (用於其他Tab頁面) */
+        .text-page {
+            line-height: 1.8;
+            color: #444;
+            font-size: 14px;
+        }
+        .text-page h3 {
+            color: #000;
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        /* 狀態控制 */
         .accordion-item.open .arrow-icon {
             transform: rotate(180deg);
-        }
-        .accordion-item.open .accordion-content {
-            /* JS會動態計算高度 */
         }
     </style>
 </head>
 <body>
 
     <div class="nav-tabs">
-        <a href="#" class="nav-item active">價目表</a>
-        <a href="#" class="nav-item">預約須知</a>
-        <a href="#" class="nav-item">術前準備</a>
-        <a href="#" class="nav-item">術後保養</a>
+        <div class="nav-item active" onclick="switchTab('price')">價目表</div>
+        <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
+        <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
+        <div class="nav-item" onclick="switchTab('care')">術後保養</div>
     </div>
 
-    <div class="event-card">
-        <div class="event-title">New Year Event</div>
-        <div class="event-desc">1/1 - 3/31 半永久紋繡 9 折</div>
-        <div class="event-tag">✨ 兩人同行 各折 $1,000</div>
-    </div>
-
-    <div class="service-list">
+    <div id="tab-price" class="tab-content active">
         
-        <div class="accordion-item open">
-            <div class="accordion-header" onclick="toggleItem(this)">
-                <div class="header-left">
-                    <div class="vertical-bar"></div>
-                    <span class="service-title">機器飄眉 <span class="service-subtitle">Machine Hairstrokes</span></span>
-                </div>
-                <div class="arrow-icon">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="price-row">
-                        <span class="item-name">單次操作</span>
-                        <div class="price-group">
-                            <span class="original-price">$10,000</span>
-                            <span class="current-price">$9,000</span>
-                        </div>
-                    </div>
-
-                    <div class="info-actions">
-                        <a href="#" class="info-btn">
-                            機器飄眉是什麼 <span class="btn-arrow">→</span>
-                        </a>
-                        <a href="#" class="info-btn">
-                            操作流程 <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="event-card">
+            <div class="event-title">New Year Event</div>
+            <div class="event-desc">1/1 - 3/31 半永久紋繡 9 折</div>
+            <div class="event-tag">兩人同行 各折 $1,000</div>
         </div>
 
-        <div class="accordion-item">
-            <div class="accordion-header" onclick="toggleItem(this)">
-                <div class="header-left">
-                    <div class="vertical-bar"></div>
-                    <span class="service-title">舊客補色 <span class="service-subtitle">Touch-up</span></span>
+        <div>
+            
+            <div class="accordion-item open">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="header-left">
+                        <div class="vertical-bar"></div>
+                        <span class="service-title">機器飄眉 <span class="service-subtitle">Hairstrokes</span></span>
+                    </div>
+                    <div class="arrow-icon">▼</div>
                 </div>
-                <div class="arrow-icon">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="content-inner">
-                    <div class="note-box">
-                        ※ 僅限本店舊客單次操作費用<br>
-                        ※ 以第一次操作日期開始計算
-                    </div>
-                    
-                    <div class="price-row">
-                        <span class="item-name">一年以內</span>
-                        <div class="price-group">
-                            <span class="current-price">$3,000</span>
+                <div class="accordion-content">
+                    <div class="content-inner">
+                        <div class="price-row">
+                            <span class="item-name">單次操作</span>
+                            <div class="price-group">
+                                <span class="original-price">$10,000</span>
+                                <span class="current-price">$9,000</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="price-row" style="margin-top: 15px;">
-                        <span class="item-name">一年 ～ 二年</span>
-                        <div class="price-group">
-                            <span class="current-price">$6,000</span>
-                        </div>
-                    </div>
-                    <div class="price-row" style="margin-top: 15px;">
-                        <span class="item-name">兩年以後</span>
-                        <div class="price-group">
-                            <span class="current-price">原價計算</span>
+                        <div class="info-actions">
+                            <a href="#" class="info-btn">機器飄眉是什麼 <span class="btn-arrow">→</span></a>
+                            <a href="#" class="info-btn">操作流程 <span class="btn-arrow">→</span></a>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="header-left">
+                        <div class="vertical-bar"></div>
+                        <span class="service-title">舊客補色 <span class="service-subtitle">Touch-up</span></span>
+                    </div>
+                    <div class="arrow-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="content-inner">
+                        <div class="note-box">
+                            ※ 僅限本店舊客單次操作費用<br>
+                            ※ 以第一次操作日期開始計算
+                        </div>
+                        <div class="price-row">
+                            <span class="item-name">一年以內</span>
+                            <div class="price-group"><span class="current-price">$3,000</span></div>
+                        </div>
+                        <div class="price-row">
+                            <span class="item-name">一年 ～ 二年</span>
+                            <div class="price-group"><span class="current-price">$6,000</span></div>
+                        </div>
+                        <div class="price-row">
+                            <span class="item-name">兩年以後</span>
+                            <div class="price-group"><span class="current-price">原價計算</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="header-left">
+                        <div class="vertical-bar"></div>
+                        <span class="service-title">無創除色 <span class="service-subtitle">Removal</span></span>
+                    </div>
+                    <div class="arrow-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="content-inner">
+                        <div class="price-row">
+                            <span class="item-name">單次操作</span>
+                            <div class="price-group"><span class="current-price">$1,500</span></div>
+                        </div>
+                        <div class="info-actions">
+                            <a href="#" class="info-btn">無創除色是什麼 <span class="btn-arrow">→</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="header-left">
+                        <div class="vertical-bar"></div>
+                        <span class="service-title">支付方式 <span class="service-subtitle">Payment</span></span>
+                    </div>
+                    <div class="arrow-icon">▼</div>
+                </div>
+                <div class="accordion-content">
+                    <div class="content-inner">
+                        <div class="note-box" style="margin-top: 0; background: #fff; border: none; padding-left: 0;">
+                            目前提供以下付款方式，請於操作當日結清款項。
+                        </div>
+                        <div class="payment-methods">
+                            <div class="payment-item"><div class="payment-icon"></div>現金支付</div>
+                            <div class="payment-item"><div class="payment-icon"></div>銀行轉帳</div>
+                            <div class="payment-item"><div class="payment-icon"></div>Line Pay</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
 
-        <div class="accordion-item">
-            <div class="accordion-header" onclick="toggleItem(this)">
-                <div class="header-left">
-                    <div class="vertical-bar"></div>
-                    <span class="service-title">無創除色 <span class="service-subtitle">Removal</span></span>
-                </div>
-                <div class="arrow-icon">▼</div>
-            </div>
-            <div class="accordion-content">
-                <div class="content-inner">
-                     <div class="price-row">
-                        <span class="item-name">單次操作</span>
-                        <div class="price-group">
-                            <span class="current-price">$1,500</span>
-                        </div>
-                    </div>
-
-                    <div class="info-actions">
-                        <a href="#" class="info-btn">
-                            無創除色是什麼 <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
+    <div id="tab-notice" class="tab-content">
+        <div class="text-page">
+            <h3>預約須知</h3>
+            <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
+               2. 若需改期請於三天前告知。<br>
+               3. 孕婦、蟹足腫體質請事先諮詢。</p>
         </div>
+    </div>
 
+    <div id="tab-prep" class="tab-content">
+        <div class="text-page">
+            <h3>術前準備</h3>
+            <p>1. 操作前一週請勿進行酸類煥膚。<br>
+               2. 前一晚請避免飲酒，保持充足睡眠。<br>
+               3. 可先畫好喜歡的眉型前來討論。</p>
+        </div>
+    </div>
+
+    <div id="tab-care" class="tab-content">
+        <div class="text-page">
+            <h3>術後保養</h3>
+            <p>1. 術後6小時內請勿碰水。<br>
+               2. 結痂期間請勿摳抓。<br>
+               3. 每日早晚使用修復霜薄擦。</p>
+        </div>
     </div>
 
     <div class="bottom-nav">
-        <button class="btn-white">Instagram</button>
+        <button class="btn-white">INSTAGRAM</button>
         <button class="btn-black">預約諮詢</button>
     </div>
 
     <script>
-        function toggleItem(header) {
+        // 切換 Tab 的功能
+        function switchTab(tabName) {
+            // 1. 移除所有 nav-item 的 active 樣式
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            // 2. 隱藏所有 tab-content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // 3. 加上 active 給被點擊的項目
+            // 這裡使用簡單的索引對應，實際專案可用 ID 對應更精準
+            const navMap = {
+                'price': 0, 'notice': 1, 'prep': 2, 'care': 3
+            };
+            document.querySelectorAll('.nav-item')[navMap[tabName]].classList.add('active');
+            document.getElementById('tab-' + tabName).classList.add('active');
+            
+            // 切換時自動滾動到最上方
+            window.scrollTo(0, 0);
+        }
+
+        // 手風琴收合功能
+        function toggleAccordion(header) {
             const item = header.parentElement;
             item.classList.toggle('open');
             
             const content = item.querySelector('.accordion-content');
             if (item.classList.contains('open')) {
-                // 自動計算展開高度
                 content.style.maxHeight = content.scrollHeight + "px";
             } else {
                 content.style.maxHeight = null;
             }
         }
 
-        // 初始化：讓預設展開的項目有正確的高度
+        // 初始化：展開預設開啟的項目
         document.addEventListener("DOMContentLoaded", function() {
             const openItems = document.querySelectorAll('.accordion-item.open .accordion-content');
             openItems.forEach(content => {
