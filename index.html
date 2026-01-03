@@ -146,14 +146,15 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            /* 修改這裡：讓左右兩邊分開 */
             justify-content: space-between;
+            /* 防止選取文字造成誤觸 */
+            user-select: none; 
+            -webkit-user-select: none;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            /* 讓左側標題區可以縮放 */
             flex: 1; 
         }
 
@@ -171,7 +172,7 @@
             font-weight: 500;
             color: var(--text-main);
             display: flex;
-            flex-direction: column; /* 改為垂直排列讓 subtitle 在下方 */
+            flex-direction: column;
             line-height: 1.2;
         }
 
@@ -182,16 +183,15 @@
             margin-top: 2px;
         }
         
-        /* 新增：右側註記樣式 */
         .header-right-note {
             font-size: 12px;
             color: var(--text-sub);
             background-color: #F5F5F5;
             padding: 4px 8px;
             border-radius: 4px;
-            margin-left: 10px; /* 與左側保持距離 */
-            margin-right: 10px; /* 與箭頭保持距離 */
-            white-space: nowrap; /* 防止文字換行 */
+            margin-left: 10px;
+            margin-right: 10px;
+            white-space: nowrap;
         }
 
         .arrow-icon {
@@ -204,7 +204,7 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.4s ease-out; /* 調整動畫曲線 */
         }
 
         .content-inner {
@@ -258,11 +258,10 @@
         .info-actions {
             margin-top: 25px;
             display: flex;
-            flex-direction: column; /* 改為垂直排列以容納展開的內容 */
+            flex-direction: column;
             gap: 12px;
         }
         
-        /* 資訊按鈕容器 */
         .info-item {
             width: 100%;
         }
@@ -283,6 +282,9 @@
             width: 100%;
             box-sizing: border-box;
             text-align: left;
+            /* 修正按鈕點擊 */
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .info-btn:active {
@@ -290,13 +292,12 @@
             transform: scale(0.99);
         }
 
-        /* 隱藏的詳細文字區塊 */
         .info-detail {
             display: none;
             padding: 15px;
             background-color: #F9F9F9;
             border-radius: 0 0 12px 12px;
-            margin-top: -5px; /* 連接感 */
+            margin-top: -5px;
             border: 1px solid #E0E0E0;
             border-top: none;
             font-size: 13px;
@@ -304,6 +305,7 @@
             color: #555;
         }
 
+        /* 顯示狀態的 Class */
         .info-detail.show {
             display: block;
             animation: slideDown 0.3s ease;
@@ -317,6 +319,8 @@
         .btn-arrow {
             font-size: 10px;
             color: #999;
+            transition: transform 0.3s;
+            display: inline-block; /* 讓旋轉生效 */
         }
 
         /* 底部按鈕 */
@@ -406,7 +410,7 @@
         .text-page h3 {
             color: var(--text-main);
             margin-top: 0;
-            margin-bottom: 5px; /* 標題與副標間距 */
+            margin-bottom: 5px;
             font-size: 20px;
             font-weight: 500;
         }
@@ -432,7 +436,8 @@
             margin: 0;
         }
 
-        .accordion-item.open .arrow-icon {
+        /* 外層箭頭旋轉 */
+        .accordion-item.open > .accordion-header .arrow-icon {
             transform: rotate(180deg);
         }
     </style>
@@ -645,20 +650,17 @@
     </div>
 
     <script>
-        // 切換 Tab
+        // 1. 切換 Tab 分頁
         function switchTab(tabName) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
+            // 移除所有 active
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
+            // 設定 Map 對應
             const navItems = document.querySelectorAll('.nav-item');
-            const navMap = {
-                'price': 0, 'notice': 1, 'prep': 2, 'care': 3, 'payment': 4
-            };
+            const navMap = { 'price': 0, 'notice': 1, 'prep': 2, 'care': 3, 'payment': 4 };
             
+            // 加上 active 並滾動
             if (navItems[navMap[tabName]]) {
                 navItems[navMap[tabName]].classList.add('active');
                 navItems[navMap[tabName]].scrollIntoView({
@@ -666,53 +668,61 @@
                 });
             }
             
+            // 顯示內容
             const content = document.getElementById('tab-' + tabName);
             if(content) content.classList.add('active');
             
+            // 滾回頂部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 手風琴主選單
+        // 2. 外層手風琴 (點擊大標題)
         function toggleAccordion(header) {
+            // 找到外層容器
             const item = header.parentElement;
+            const content = item.querySelector('.accordion-content');
+            
+            // 切換開啟狀態
             item.classList.toggle('open');
             
-            const content = item.querySelector('.accordion-content');
+            // 設定高度
             if (item.classList.contains('open')) {
-                // 重新計算高度，包含內部可能已展開的資訊區
+                // 設定為實際高度 (scrollHeight)
                 content.style.maxHeight = content.scrollHeight + "px";
             } else {
                 content.style.maxHeight = null;
             }
         }
 
-        // 內部資訊展開 (機器飄眉是什麼...)
+        // 3. 內層詳細資訊 (點擊小按鈕)
         function toggleInfo(btn) {
+            // 阻止事件冒泡 (避免觸發外層開關，雖然結構分開但保險起見)
+            event.stopPropagation();
+
             const detail = btn.nextElementSibling;
+            const arrow = btn.querySelector('.btn-arrow');
+            
+            // 切換顯示
             detail.classList.toggle('show');
             
-            // 需要重新計算外層手風琴的高度，否則內容會被切掉
-            const parentContent = btn.closest('.accordion-content');
-            if (parentContent) {
-                // 先設為 none 讓它重算，再設為具體像素
-                parentContent.style.maxHeight = "none"; 
-                // 稍微延遲一下再鎖定高度（確保動畫順暢），或直接保留 none 讓它自適應
-                // 為了保留 transition 效果，通常需要計算，這裡簡單處理：
-                parentContent.style.maxHeight = parentContent.scrollHeight + "px";
-            }
-            
-            // 旋轉小箭頭
-            const arrow = btn.querySelector('.btn-arrow');
+            // 旋轉箭頭
             if(detail.classList.contains('show')) {
                 arrow.style.transform = 'rotate(180deg)';
-                arrow.style.display = 'inline-block';
             } else {
                 arrow.style.transform = 'rotate(0deg)';
             }
+
+            // 【關鍵修正】重新計算外層高度
+            // 因為內層變高了，外層容器也必須變高，否則內容會被切掉
+            const parentContent = btn.closest('.accordion-content');
+            if (parentContent) {
+                // 將外層高度更新為新的總高度
+                parentContent.style.maxHeight = parentContent.scrollHeight + "px";
+            }
         }
 
+        // 4. 頁面載入後，確保預設開啟的項目高度正確
         document.addEventListener("DOMContentLoaded", function() {
-            // 初始化展開的項目高度
             const openItems = document.querySelectorAll('.accordion-item.open .accordion-content');
             openItems.forEach(content => {
                 content.style.maxHeight = content.scrollHeight + "px";
