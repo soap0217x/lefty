@@ -156,6 +156,7 @@
         .header-left {
             display: flex;
             align-items: center;
+            flex-wrap: wrap; /* 允許小螢幕換行 */
         }
 
         /* 標題前的裝飾線 (改為深灰圓角) */
@@ -171,6 +172,16 @@
             font-size: 16px;
             font-weight: 500;
             color: var(--text-main);
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+
+        .service-note {
+            font-size: 13px;
+            font-weight: normal;
+            color: var(--text-sub);
+            margin-left: 8px;
         }
 
         .service-subtitle {
@@ -210,15 +221,20 @@
             color: var(--text-main);
         }
 
+        /* 修改價格群組為垂直排列 */
         .price-group {
+            display: flex;
+            flex-direction: column; /* 垂直堆疊 */
+            align-items: flex-end; /* 靠右對齊 */
             text-align: right;
         }
 
         .original-price {
-            font-size: 13px;
+            font-size: 12px;
             color: #CCC;
             text-decoration: line-through;
-            margin-right: 8px;
+            margin-bottom: 4px; /* 增加底部間距 */
+            margin-right: 0; /* 移除右側間距 */
         }
 
         .current-price {
@@ -363,6 +379,17 @@
             font-size: 20px;
             font-weight: 500;
         }
+        
+        /* 新增內容框樣式 (用於須知、準備、保養) */
+        .content-box {
+            background-color: #F8F8F8; /* 與 note-box 相同背景 */
+            padding: 25px;
+            border-radius: 16px;
+        }
+        
+        .content-box p {
+            margin: 0; /* 移除段落預設邊距 */
+        }
 
         /* 狀態控制 */
         .accordion-item.open .arrow-icon {
@@ -375,10 +402,10 @@
     <div class="nav-tabs-container">
         <div class="nav-tabs">
             <div class="nav-item active" onclick="switchTab('price')">價目表</div>
-            <div class="nav-item" onclick="switchTab('payment')">支付方式</div>
             <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
             <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
             <div class="nav-item" onclick="switchTab('care')">術後保養</div>
+            <div class="nav-item" onclick="switchTab('payment')">支付方式</div>
         </div>
     </div>
 
@@ -396,7 +423,11 @@
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <div class="header-left">
                         <div class="vertical-bar"></div>
-                        <span class="service-title">機器飄眉 <span class="service-subtitle">Hairstrokes</span></span>
+                        <span class="service-title">
+                            機器飄眉 
+                            <span class="service-note">(含三個月內補色)</span>
+                            <span class="service-subtitle">Hairstrokes</span>
+                        </span>
                     </div>
                     <div class="arrow-icon">▼</div>
                 </div>
@@ -492,40 +523,39 @@
                 </div>
             </div>
 
-            <div class="payment-card">
-                <div class="pay-icon">L</div>
-                <div class="pay-info">
-                    <h4>Line Pay</h4>
-                    <p>Electronic Payment</p>
-                </div>
             </div>
-        </div>
     </div>
 
     <div id="tab-notice" class="tab-content">
         <div class="text-page">
             <h3>預約須知</h3>
-            <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
-               2. 若需改期請於三天前告知。<br>
-               3. 孕婦、蟹足腫體質請事先諮詢。</p>
+            <div class="content-box">
+                <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
+                   2. 若需改期請於三天前告知。<br>
+                   3. 孕婦、蟹足腫體質請事先諮詢。</p>
+            </div>
         </div>
     </div>
 
     <div id="tab-prep" class="tab-content">
         <div class="text-page">
             <h3>術前準備</h3>
-            <p>1. 操作前一週請勿進行酸類煥膚。<br>
-               2. 前一晚請避免飲酒，保持充足睡眠。<br>
-               3. 可先畫好喜歡的眉型前來討論。</p>
+             <div class="content-box">
+                <p>1. 操作前一週請勿進行酸類煥膚。<br>
+                   2. 前一晚請避免飲酒，保持充足睡眠。<br>
+                   3. 可先畫好喜歡的眉型前來討論。</p>
+            </div>
         </div>
     </div>
 
     <div id="tab-care" class="tab-content">
         <div class="text-page">
             <h3>術後保養</h3>
-            <p>1. 術後6小時內請勿碰水。<br>
-               2. 結痂期間請勿摳抓。<br>
-               3. 每日早晚使用修復霜薄擦。</p>
+             <div class="content-box">
+                <p>1. 術後6小時內請勿碰水。<br>
+                   2. 結痂期間請勿摳抓。<br>
+                   3. 每日早晚使用修復霜薄擦。</p>
+            </div>
         </div>
     </div>
 
@@ -547,8 +577,13 @@
 
             // 加上樣式
             const navItems = document.querySelectorAll('.nav-item');
+            // 更新了映射表以符合新的 Tab 順序
             const navMap = {
-                'price': 0, 'payment': 1, 'notice': 2, 'prep': 3, 'care': 4
+                'price': 0, 
+                'notice': 1, 
+                'prep': 2, 
+                'care': 3,
+                'payment': 4
             };
             
             if (navItems[navMap[tabName]]) {
