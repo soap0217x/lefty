@@ -380,11 +380,13 @@
             font-weight: 500;
         }
         
-        /* 新增內容框樣式 (用於須知、準備、保養) */
+        /* 修改後的內容框樣式：跟支付方式卡片一致 */
         .content-box {
-            background-color: #F8F8F8; /* 與 note-box 相同背景 */
-            padding: 25px;
-            border-radius: 16px;
+            background-color: #fff; /* 改為白底 */
+            border: 1px solid var(--border-color); /* 加入淺灰邊框 */
+            padding: 30px; /* 增加內距 */
+            border-radius: var(--radius-card); /* 使用相同的圓角 */
+            margin-bottom: 15px;
         }
         
         .content-box p {
@@ -523,7 +525,7 @@
                 </div>
             </div>
 
-            </div>
+        </div>
     </div>
 
     <div id="tab-notice" class="tab-content">
