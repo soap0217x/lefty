@@ -147,7 +147,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            /* 防止選取文字造成誤觸 */
             user-select: none; 
             -webkit-user-select: none;
         }
@@ -204,7 +203,7 @@
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out; /* 調整動畫曲線 */
+            transition: max-height 0.4s ease-out;
         }
 
         .content-inner {
@@ -282,7 +281,6 @@
             width: 100%;
             box-sizing: border-box;
             text-align: left;
-            /* 修正按鈕點擊 */
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
@@ -305,7 +303,6 @@
             color: #555;
         }
 
-        /* 顯示狀態的 Class */
         .info-detail.show {
             display: block;
             animation: slideDown 0.3s ease;
@@ -320,7 +317,7 @@
             font-size: 10px;
             color: #999;
             transition: transform 0.3s;
-            display: inline-block; /* 讓旋轉生效 */
+            display: inline-block;
         }
 
         /* 底部按鈕 */
@@ -401,7 +398,7 @@
             color: var(--text-sub);
         }
 
-        /* 文字頁面通用 */
+        /* 文字頁面通用與英文標題設定 */
         .text-page {
             line-height: 1.8;
             color: var(--text-sub);
@@ -410,16 +407,19 @@
         .text-page h3 {
             color: var(--text-main);
             margin-top: 0;
-            margin-bottom: 5px;
+            margin-bottom: 25px; /* 增加一點下方距離 */
             font-size: 20px;
             font-weight: 500;
+            display: flex;
+            align-items: baseline; /* 讓中文英文底部對齊 */
+            flex-wrap: wrap;
+            gap: 10px; /* 中英文間距 */
         }
         
-        .text-page .en-subtitle {
-            display: block;
+        /* 英文標題樣式 (在中文旁邊) */
+        .en-title {
             font-size: 14px;
-            color: #999;
-            margin-bottom: 25px;
+            color: #AAA;
             font-weight: normal;
             font-family: Arial, sans-serif;
         }
@@ -447,6 +447,7 @@
     <div class="nav-tabs-container">
         <div class="nav-tabs">
             <div class="nav-item active" onclick="switchTab('price')">項目及價目表</div>
+            <div class="nav-item" onclick="switchTab('promo')">優惠方式</div>
             <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
             <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
             <div class="nav-item" onclick="switchTab('care')">術後保養</div>
@@ -583,10 +584,19 @@
         </div>
     </div>
 
+    <div id="tab-promo" class="tab-content">
+        <div class="text-page">
+            <h3>優惠方式 <span class="en-title">Promotions</span></h3>
+            <div class="content-box">
+                <p>舊客推薦一位新客操作半永久紋繡項目<br>
+                   下一次任一項目可折抵 $1,000</p>
+            </div>
+        </div>
+    </div>
+
     <div id="tab-payment" class="tab-content">
         <div class="text-page">
-            <h3>支付方式</h3>
-            <span class="en-subtitle">Payment Methods</span>
+            <h3>支付方式 <span class="en-title">Payment Methods</span></h3>
             <p style="margin-bottom: 25px;">請於操作當日結清款項，目前提供以下方式：</p>
             
             <div class="payment-card">
@@ -610,8 +620,7 @@
 
     <div id="tab-notice" class="tab-content">
         <div class="text-page">
-            <h3>預約須知</h3>
-            <span class="en-subtitle">Booking Policy</span>
+            <h3>預約須知 <span class="en-title">Booking Policy</span></h3>
             <div class="content-box">
                 <p>1. 請務必準時抵達，保留15分鐘彈性時間。<br>
                    2. 若需改期請於三天前告知。<br>
@@ -622,8 +631,7 @@
 
     <div id="tab-prep" class="tab-content">
         <div class="text-page">
-            <h3>術前準備</h3>
-            <span class="en-subtitle">Pre-care Instructions</span>
+            <h3>術前準備 <span class="en-title">Pre-care Instructions</span></h3>
              <div class="content-box">
                 <p>1. 操作前一週請勿進行酸類煥膚。<br>
                    2. 前一晚請避免飲酒，保持充足睡眠。<br>
@@ -634,8 +642,7 @@
 
     <div id="tab-care" class="tab-content">
         <div class="text-page">
-            <h3>術後保養</h3>
-            <span class="en-subtitle">After-care Instructions</span>
+            <h3>術後保養 <span class="en-title">After-care Instructions</span></h3>
              <div class="content-box">
                 <p>1. 術後6小時內請勿碰水。<br>
                    2. 結痂期間請勿摳抓。<br>
@@ -652,15 +659,20 @@
     <script>
         // 1. 切換 Tab 分頁
         function switchTab(tabName) {
-            // 移除所有 active
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-            // 設定 Map 對應
+            // 更新了對應表，加入了 promo
             const navItems = document.querySelectorAll('.nav-item');
-            const navMap = { 'price': 0, 'notice': 1, 'prep': 2, 'care': 3, 'payment': 4 };
+            const navMap = { 
+                'price': 0, 
+                'promo': 1, // 新增的優惠方式在第二個位置
+                'notice': 2, 
+                'prep': 3, 
+                'care': 4, 
+                'payment': 5 
+            };
             
-            // 加上 active 並滾動
             if (navItems[navMap[tabName]]) {
                 navItems[navMap[tabName]].classList.add('active');
                 navItems[navMap[tabName]].scrollIntoView({
@@ -668,60 +680,48 @@
                 });
             }
             
-            // 顯示內容
             const content = document.getElementById('tab-' + tabName);
             if(content) content.classList.add('active');
             
-            // 滾回頂部
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 2. 外層手風琴 (點擊大標題)
+        // 2. 外層手風琴
         function toggleAccordion(header) {
-            // 找到外層容器
             const item = header.parentElement;
             const content = item.querySelector('.accordion-content');
             
-            // 切換開啟狀態
             item.classList.toggle('open');
             
-            // 設定高度
             if (item.classList.contains('open')) {
-                // 設定為實際高度 (scrollHeight)
                 content.style.maxHeight = content.scrollHeight + "px";
             } else {
                 content.style.maxHeight = null;
             }
         }
 
-        // 3. 內層詳細資訊 (點擊小按鈕)
+        // 3. 內層詳細資訊
         function toggleInfo(btn) {
-            // 阻止事件冒泡 (避免觸發外層開關，雖然結構分開但保險起見)
             event.stopPropagation();
 
             const detail = btn.nextElementSibling;
             const arrow = btn.querySelector('.btn-arrow');
             
-            // 切換顯示
             detail.classList.toggle('show');
             
-            // 旋轉箭頭
             if(detail.classList.contains('show')) {
                 arrow.style.transform = 'rotate(180deg)';
             } else {
                 arrow.style.transform = 'rotate(0deg)';
             }
 
-            // 【關鍵修正】重新計算外層高度
-            // 因為內層變高了，外層容器也必須變高，否則內容會被切掉
+            // 重新計算外層高度
             const parentContent = btn.closest('.accordion-content');
             if (parentContent) {
-                // 將外層高度更新為新的總高度
                 parentContent.style.maxHeight = parentContent.scrollHeight + "px";
             }
         }
 
-        // 4. 頁面載入後，確保預設開啟的項目高度正確
         document.addEventListener("DOMContentLoaded", function() {
             const openItems = document.querySelectorAll('.accordion-item.open .accordion-content');
             openItems.forEach(content => {
