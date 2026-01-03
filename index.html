@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glow Beauty - 極簡黑白</title>
+    <title>Glow Beauty - 柔和黑白</title>
     <style>
         :root {
-            /* 全站色調設定：純黑白 */
-            --bg-color: #FFFFFF;
-            --card-bg: #FFFFFF;
-            --text-main: #000000;
-            --text-sub: #555555;
-            --border-color: #E5E5E5; /* 極淺灰線條 */
-            --border-active: #000000; /* 選中時的黑線 */
+            /* 柔和黑白配色 */
+            --bg-color: #FAFAFA;       /* 背景：極淺灰白，不刺眼 */
+            --card-bg: #FFFFFF;        /* 卡片：純白 */
+            --text-main: #333333;      /* 主字：深炭灰，比純黑柔和 */
+            --text-sub: #666666;       /* 副字：中灰 */
+            --border-color: #E6E6E6;   /* 邊框：淺灰 */
+            --accent-color: #333333;   /* 重點色 */
+            
+            /* 圓角設定：更圓潤 */
+            --radius-card: 24px;       /* 卡片圓角 */
+            --radius-btn: 50px;        /* 按鈕圓角 (全圓) */
         }
 
         body {
@@ -21,112 +25,132 @@
             margin: 0;
             padding: 0;
             color: var(--text-main);
-            padding-bottom: 100px;
+            padding-bottom: 110px; /* 底部空間 */
+            letter-spacing: 0.03em; /* 稍微增加字距，增加透氣感 */
         }
 
-        /* 頂部導航 (Tabs) */
-        .nav-tabs {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0 10px;
+        /* 1. 頂部導航 (可橫向滑動以容納更多項目) */
+        .nav-tabs-container {
             position: sticky;
             top: 0;
+            background: rgba(250, 250, 250, 0.95); /* 毛玻璃效果 */
+            backdrop-filter: blur(8px);
             z-index: 100;
             border-bottom: 1px solid var(--border-color);
-            backdrop-filter: blur(5px);
+            padding: 5px 0;
         }
 
+        .nav-tabs {
+            display: flex;
+            overflow-x: auto; /* 允許橫向滑動 */
+            white-space: nowrap;
+            padding: 0 15px;
+            gap: 25px; /* 選單間距加大 */
+            -webkit-overflow-scrolling: touch; /* iOS 滑動優化 */
+        }
+        
+        /* 隱藏卷軸 */
+        .nav-tabs::-webkit-scrollbar { display: none; }
+
         .nav-item {
-            flex: 1;
-            text-align: center;
             padding: 18px 0;
-            font-size: 14px;
+            font-size: 15px;
             color: #999;
             cursor: pointer;
             position: relative;
             transition: color 0.3s;
+            flex-shrink: 0; /* 防止擠壓 */
         }
 
         .nav-item.active {
             color: var(--text-main);
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        /* 黑色底線指示器 */
+        /* 圓點指示器 (比底線更柔和) */
         .nav-item.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: 8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            height: 2px;
-            background-color: #000;
+            width: 6px;
+            height: 6px;
+            background-color: var(--text-main);
+            border-radius: 50%;
         }
 
-        /* 頁面內容容器 (Tab Content) */
+        /* 頁面內容容器 */
         .tab-content {
-            display: none; /* 預設隱藏 */
+            display: none;
             padding: 20px 15px;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.5s ease;
         }
         
         .tab-content.active {
-            display: block; /* 顯示選中的頁面 */
+            display: block;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 優惠活動 Banner (改為黑框白底) */
+        /* 優惠活動 Banner */
         .event-card {
-            border: 1px solid #000;
+            border: 1px solid var(--border-color);
             margin-bottom: 25px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            background-color: #FAFAFA;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-card); /* 圓潤導角 */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* 極輕柔的陰影 */
         }
 
         .event-title {
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 500;
             margin-bottom: 8px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            color: var(--text-main);
         }
 
         .event-desc {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-sub);
             margin-bottom: 15px;
         }
 
         .event-tag {
             display: inline-block;
-            background-color: #000;
+            background-color: var(--text-main);
             color: #fff;
-            padding: 5px 15px;
+            padding: 6px 16px;
             font-size: 12px;
-            letter-spacing: 0.5px;
+            border-radius: 50px; /* 膠囊狀 */
         }
 
-        /* 手風琴列表樣式 */
+        /* 手風琴列表樣式 (卡片式) */
         .accordion-item {
             background-color: var(--card-bg);
-            border-bottom: 1px solid var(--border-color); /* 改用底線分隔，更簡約 */
-            margin-bottom: 0;
+            border: 1px solid var(--border-color); /* 保留邊框 */
+            border-radius: var(--radius-card); /* 圓潤導角 */
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* 選中時邊框稍微加深，增加層次 */
+        .accordion-item.open {
+            border-color: #C0C0C0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
         }
 
         .accordion-header {
-            padding: 25px 5px;
+            padding: 25px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            user-select: none;
         }
 
         .header-left {
@@ -134,44 +158,43 @@
             align-items: center;
         }
 
-        /* 標題前的裝飾線改為黑色 */
+        /* 標題前的裝飾線 (改為深灰圓角) */
         .vertical-bar {
-            width: 3px;
-            height: 16px;
-            background-color: #000;
+            width: 4px;
+            height: 18px;
+            background-color: var(--text-main);
             margin-right: 15px;
+            border-radius: 4px;
         }
 
         .service-title {
             font-size: 16px;
             font-weight: 500;
             color: var(--text-main);
-            letter-spacing: 0.5px;
         }
 
         .service-subtitle {
-            font-size: 12px;
-            color: #888;
+            font-size: 13px;
+            color: #999;
             margin-left: 8px;
             font-weight: normal;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .arrow-icon {
-            font-size: 10px;
-            color: #000;
-            transition: transform 0.3s ease;
+            font-size: 12px;
+            color: #BBB;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .content-inner {
-            padding: 0 10px 30px 22px; /* 稍微縮排 */
+            padding: 0 25px 30px 25px;
+            border-top: 1px solid #F5F5F5; /* 內容分隔線極淡 */
         }
 
         /* 價格區塊 */
@@ -179,12 +202,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .item-name {
-            font-size: 14px;
-            color: #333;
+            font-size: 15px;
+            color: var(--text-main);
         }
 
         .price-group {
@@ -192,30 +215,30 @@
         }
 
         .original-price {
-            font-size: 12px;
-            color: #BBB;
+            font-size: 13px;
+            color: #CCC;
             text-decoration: line-through;
             margin-right: 8px;
         }
 
         .current-price {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
-            color: #000;
+            color: var(--text-main);
         }
 
-        /* 提示框 (改為極淺灰底黑字) */
+        /* 提示框 (改為更柔和的圓角與顏色) */
         .note-box {
-            background-color: #F7F7F7;
-            padding: 15px;
-            font-size: 12px;
-            color: #555;
-            margin: 15px 0;
-            line-height: 1.8;
-            border-left: 2px solid #000;
+            background-color: #F8F8F8;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            color: var(--text-sub);
+            margin: 20px 0;
+            line-height: 1.6;
         }
 
-        /* 資訊按鈕 (黑框白底) */
+        /* 資訊按鈕 (柔和黑白) */
         .info-actions {
             margin-top: 25px;
             display: flex;
@@ -227,24 +250,26 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000; /* 黑框 */
+            background-color: #FFFFFF;
+            color: var(--text-main);
+            border: 1px solid #E0E0E0;
             padding: 12px 0;
             font-size: 13px;
-            font-weight: 500;
+            border-radius: 12px; /* 稍微圓潤的按鈕 */
             flex: 1;
             transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .info-btn:active {
-            background-color: #000;
-            color: #fff;
+            background-color: #F5F5F5;
+            transform: scale(0.98);
         }
 
         .btn-arrow {
-            margin-left: 8px;
+            margin-left: 6px;
             font-size: 14px;
+            color: #999;
         }
 
         /* 底部按鈕 */
@@ -255,65 +280,88 @@
             transform: translateX(-50%);
             display: flex;
             gap: 15px;
-            width: 85%;
+            width: 88%;
             max-width: 400px;
             z-index: 1000;
         }
 
-        .btn-white, .btn-black {
+        .btn-base {
             flex: 1;
             padding: 16px;
-            font-size: 13px;
-            font-weight: bold;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
             text-align: center;
-            border: 1px solid #000;
+            border-radius: var(--radius-btn);
             letter-spacing: 1px;
-            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08); /* 柔和陰影 */
+            transition: transform 0.2s;
         }
 
         .btn-white {
             background: #fff;
-            color: #000;
+            color: var(--text-main);
+            border: 1px solid #E0E0E0; /* 邊框更淡 */
         }
 
         .btn-black {
-            background: #000;
+            background: var(--text-main);
             color: #fff;
+            border: none;
         }
 
-        /* 支付方式圖標區 (簡單文字呈現) */
-        .payment-methods {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            color: #333;
-            font-size: 14px;
+        .btn-base:active {
+            transform: scale(0.96);
         }
-        
-        .payment-item {
+
+        /* 支付方式樣式 (Tab內容) */
+        .payment-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            padding: 30px;
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
         }
         
-        .payment-icon {
-            width: 8px;
-            height: 8px;
-            border: 1px solid #000;
+        .pay-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #F5F5F5;
             border-radius: 50%;
-            margin-right: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 18px;
+            color: #555;
+        }
+        
+        .pay-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: var(--text-main);
+        }
+        
+        .pay-info p {
+            margin: 0;
+            font-size: 13px;
+            color: var(--text-sub);
         }
 
-        /* 簡單的文字排版 (用於其他Tab頁面) */
+        /* 其他文字頁面 */
         .text-page {
             line-height: 1.8;
-            color: #444;
-            font-size: 14px;
+            color: var(--text-sub);
+            font-size: 15px;
         }
         .text-page h3 {
-            color: #000;
+            color: var(--text-main);
             margin-top: 0;
-            font-size: 18px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 500;
         }
 
         /* 狀態控制 */
@@ -324,11 +372,14 @@
 </head>
 <body>
 
-    <div class="nav-tabs">
-        <div class="nav-item active" onclick="switchTab('price')">價目表</div>
-        <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
-        <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
-        <div class="nav-item" onclick="switchTab('care')">術後保養</div>
+    <div class="nav-tabs-container">
+        <div class="nav-tabs">
+            <div class="nav-item active" onclick="switchTab('price')">價目表</div>
+            <div class="nav-item" onclick="switchTab('payment')">支付方式</div>
+            <div class="nav-item" onclick="switchTab('notice')">預約須知</div>
+            <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
+            <div class="nav-item" onclick="switchTab('care')">術後保養</div>
+        </div>
     </div>
 
     <div id="tab-price" class="tab-content active">
@@ -417,28 +468,37 @@
                 </div>
             </div>
 
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="header-left">
-                        <div class="vertical-bar"></div>
-                        <span class="service-title">支付方式 <span class="service-subtitle">Payment</span></span>
-                    </div>
-                    <div class="arrow-icon">▼</div>
-                </div>
-                <div class="accordion-content">
-                    <div class="content-inner">
-                        <div class="note-box" style="margin-top: 0; background: #fff; border: none; padding-left: 0;">
-                            目前提供以下付款方式，請於操作當日結清款項。
-                        </div>
-                        <div class="payment-methods">
-                            <div class="payment-item"><div class="payment-icon"></div>現金支付</div>
-                            <div class="payment-item"><div class="payment-icon"></div>銀行轉帳</div>
-                            <div class="payment-item"><div class="payment-icon"></div>Line Pay</div>
-                        </div>
-                    </div>
+        </div>
+    </div>
+
+    <div id="tab-payment" class="tab-content">
+        <div class="text-page">
+            <h3>Payment Methods</h3>
+            <p style="margin-bottom: 25px;">請於操作當日結清款項，目前提供以下方式：</p>
+            
+            <div class="payment-card">
+                <div class="pay-icon">$</div>
+                <div class="pay-info">
+                    <h4>現金支付</h4>
+                    <p>Cash</p>
                 </div>
             </div>
 
+            <div class="payment-card">
+                <div class="pay-icon">B</div>
+                <div class="pay-info">
+                    <h4>銀行轉帳</h4>
+                    <p>Bank Transfer (提供當日轉帳)</p>
+                </div>
+            </div>
+
+            <div class="payment-card">
+                <div class="pay-icon">L</div>
+                <div class="pay-info">
+                    <h4>Line Pay</h4>
+                    <p>Electronic Payment</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -470,32 +530,42 @@
     </div>
 
     <div class="bottom-nav">
-        <button class="btn-white">INSTAGRAM</button>
-        <button class="btn-black">預約諮詢</button>
+        <button class="btn-base btn-white">INSTAGRAM</button>
+        <button class="btn-base btn-black">預約諮詢</button>
     </div>
 
     <script>
         // 切換 Tab 的功能
         function switchTab(tabName) {
-            // 1. 移除所有 nav-item 的 active 樣式
+            // 移除樣式
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
-            // 2. 隱藏所有 tab-content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
 
-            // 3. 加上 active 給被點擊的項目
-            // 這裡使用簡單的索引對應，實際專案可用 ID 對應更精準
+            // 加上樣式
+            const navItems = document.querySelectorAll('.nav-item');
             const navMap = {
-                'price': 0, 'notice': 1, 'prep': 2, 'care': 3
+                'price': 0, 'payment': 1, 'notice': 2, 'prep': 3, 'care': 4
             };
-            document.querySelectorAll('.nav-item')[navMap[tabName]].classList.add('active');
-            document.getElementById('tab-' + tabName).classList.add('active');
             
-            // 切換時自動滾動到最上方
-            window.scrollTo(0, 0);
+            if (navItems[navMap[tabName]]) {
+                navItems[navMap[tabName]].classList.add('active');
+                
+                // 自動將選中的標籤捲動到視野中央
+                navItems[navMap[tabName]].scrollIntoView({
+                    behavior: 'smooth',
+                    inline: 'center',
+                    block: 'nearest'
+                });
+            }
+            
+            const content = document.getElementById('tab-' + tabName);
+            if(content) content.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         // 手風琴收合功能
@@ -511,7 +581,6 @@
             }
         }
 
-        // 初始化：展開預設開啟的項目
         document.addEventListener("DOMContentLoaded", function() {
             const openItems = document.querySelectorAll('.accordion-item.open .accordion-content');
             openItems.forEach(content => {
