@@ -307,6 +307,17 @@
             color: #555;
         }
 
+        /* 針對 info-detail 內的列表進行樣式調整 */
+        .info-detail ul {
+            padding-left: 20px;
+            margin: 5px 0 10px 0;
+        }
+        
+        .info-detail li {
+            margin-bottom: 5px;
+            list-style-type: disc; /* 強制實心黑點 */
+        }
+
         .info-detail.show {
             display: block;
             animation: slideDown 0.3s ease;
@@ -529,11 +540,13 @@
                                 </button>
                                 <div class="info-detail">
                                     機器飄眉是追求「原生感」的極致選擇：<br><br>
-                                    <b>✨ 獨家優點：</b><br>
-                                    1. <b>仿真毛流</b>：宛如原生眉毛的細緻線條，素顏也能很有精神。<br>
-                                    2. <b>輕柔操作</b>：技術手法取代傳統方式，怕痛的你也能安心變美變帥。<br>
-                                    3. <b>零修復期</b>：做完即自然，隔天即可上班。<br>
-                                    4. <b>全膚質</b>：任何肌膚皆適用，留色度好。
+                                    <b>✨ 獨家優點：</b>
+                                    <ul>
+                                        <li><b>仿真毛流</b>：宛如原生眉毛的細緻線條，素顏也能很有精神。</li>
+                                        <li><b>輕柔操作</b>：技術手法取代傳統方式，怕痛的你也能安心變美變帥。</li>
+                                        <li><b>零修復期</b>：做完即自然，隔天即可上班。</li>
+                                        <li><b>全膚質</b>：任何肌膚皆適用，留色度好。</li>
+                                    </ul>
                                 </div>
                             </div>
                             
@@ -543,10 +556,12 @@
                                     <span class="btn-arrow"> ▼ </span>
                                 </button>
                                 <div class="info-detail">
-                                    1. 填寫同意書<br>
-                                    2. 溝通與眉型設計<br>
-                                    3. 毛流設計與操作<br>
-                                    4. 術後衛教說明<br>
+                                    <ul>
+                                        <li>填寫同意書</li>
+                                        <li>溝通與眉型設計</li>
+                                        <li>毛流設計與操作</li>
+                                        <li>術後衛教說明</li>
+                                    </ul>
                                     全程使用拋棄式一人一套耗材，安全衛生。
                                 </div>
                             </div>
@@ -670,7 +685,7 @@
 
                 <div style="border-top: 1px dashed #eee; padding-top: 20px;">
                     <strong style="color: var(--text-main); display: block; margin-bottom: 12px; font-size: 16px;">臉部近期醫美操作提醒：</strong>
-                    <ul style="font-size: 14px; color: #555; list-style-type: circle;">
+                    <ul style="font-size: 14px; color: #555;">
                         <li>玻尿酸、肉毒注射 、手術 → 至少間隔 1 個月再預約</li>
                         <li>雷射、換膚、酸類治療 → 至少間隔 1 個月再預約</li>
                         <li>服用抗凝血藥物（阿司匹林、魚油、維生素 E 等） → 預約前至少停用 7 天以上</li>
