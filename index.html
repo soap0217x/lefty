@@ -223,8 +223,9 @@
 
         /* 特別針對「機器飄眉」的樣式調整 */
         .price-row.special-row {
+            /* 上方留白給定價，下方不需要太多了，因為活動價移到旁邊了 */
             margin-top: 35px; 
-            margin-bottom: 28px;
+            margin-bottom: 15px;
         }
 
         .item-name {
@@ -243,11 +244,16 @@
             text-align: right;
         }
         
-        /* 特殊價格群組：這裡加了 transform 往上移 4px */
+        /* 特殊價格群組：這裡加了 transform 往上移，確保對齊 */
         .price-group-special {
             position: relative;
             text-align: right;
-            transform: translateY(-4px); /* 關鍵修改：整體往上提 */
+            transform: translateY(-4px); 
+            /* 使用 Flexbox 讓 9000 和 新年活動價 排在同一行 */
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+            gap: 6px; /* 兩個文字之間的間距 */
         }
 
         /* $9000 主價格 */
@@ -257,13 +263,12 @@
             color: var(--text-main);
             margin: 0;
             line-height: 1.5;
-            display: inline-block; 
         }
 
         /* 上方浮動小字：定價 */
         .float-top-text {
             position: absolute;
-            bottom: 100%; 
+            bottom: 100%; /* 貼在上方 */
             right: 0;
             margin-bottom: 2px;
             font-size: 12px;
@@ -273,16 +278,12 @@
             line-height: 1.2;
         }
 
-        /* 下方浮動小字：新年活動價 */
-        .float-bottom-text {
-            position: absolute;
-            top: 100%; 
-            right: 0;
-            margin-top: 2px;
+        /* 側邊文字：新年活動價 */
+        .side-promo-text {
             font-size: 12px;
             color: #999;
             white-space: nowrap;
-            line-height: 1.2;
+            /* 保持在同一行顯示 */
         }
         
         .price-group-normal {
@@ -581,7 +582,7 @@
                             <div class="price-group-special">
                                 <span class="float-top-text">定價$10,000</span>
                                 <span class="current-price">$9,000</span>
-                                <span class="float-bottom-text">新年活動價</span>
+                                <span class="side-promo-text">新年活動價</span>
                             </div>
                         </div>
                         
