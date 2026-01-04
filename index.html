@@ -212,18 +212,17 @@
             border-top: 1px solid #F5F5F5;
         }
 
-        /* 價格行設定 - 改用 center 對齊 */
+        /* 價格行設定 */
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* 這裡改為 center，對於相同大小的文字對齊更穩 */
+            align-items: center; 
             margin-top: 20px;
             position: relative;
         }
 
         /* 特別針對「機器飄眉」的樣式調整 */
         .price-row.special-row {
-            /* 上下留白給浮動文字，但不影響中間對齊 */
             margin-top: 35px; 
             margin-bottom: 28px;
         }
@@ -244,11 +243,11 @@
             text-align: right;
         }
         
-        /* 特殊價格群組 */
+        /* 特殊價格群組：這裡加了 transform 往上移 4px */
         .price-group-special {
             position: relative;
             text-align: right;
-            /* 不需要額外設定高度，讓它自然與左邊 center 對齊 */
+            transform: translateY(-4px); /* 關鍵修改：整體往上提 */
         }
 
         /* $9000 主價格 */
