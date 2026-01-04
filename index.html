@@ -11,14 +11,11 @@
 
     <style>
         :root {
-            /* 柔和黑白配色 */
             --bg-color: #FAFAFA;
             --card-bg: #FFFFFF;
             --text-main: #333333;
             --text-sub: #666666;
             --border-color: #E6E6E6;
-            
-            /* 圓角設定 */
             --radius-card: 24px;
             --radius-btn: 50px;
         }
@@ -33,7 +30,6 @@
             letter-spacing: 0.03em;
         }
 
-        /* 導航 */
         .nav-tabs-container {
             position: sticky;
             top: 0;
@@ -82,7 +78,6 @@
             border-radius: 50%;
         }
 
-        /* 內容區塊 */
         .tab-content {
             display: none;
             padding: 20px 15px;
@@ -98,7 +93,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Banner */
         .event-card {
             border: 1px solid var(--border-color);
             margin-bottom: 25px;
@@ -131,7 +125,6 @@
             border-radius: 50px;
         }
 
-        /* 手風琴列表 */
         .accordion-item {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -219,18 +212,18 @@
             border-top: 1px solid #F5F5F5;
         }
 
-        /* 價格行設定 - 核心對齊樣式 */
+        /* 價格行設定 - 改用 center 對齊 */
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: baseline; /* 讓文字底部基準線對齊 */
+            align-items: center; /* 這裡改為 center，對於相同大小的文字對齊更穩 */
             margin-top: 20px;
             position: relative;
         }
 
         /* 特別針對「機器飄眉」的樣式調整 */
         .price-row.special-row {
-            /* 增加上下 margin 是為了給浮動的小字留空間 */
+            /* 上下留白給浮動文字，但不影響中間對齊 */
             margin-top: 35px; 
             margin-bottom: 28px;
         }
@@ -240,7 +233,7 @@
             color: var(--text-main);
             font-weight: 600; 
             margin: 0;
-            line-height: 1.5; /* 統一字體行高 */
+            line-height: 1.5;
         }
 
         /* 價格群組容器 */
@@ -251,10 +244,11 @@
             text-align: right;
         }
         
-        /* 特殊價格群組：使用相對定位 */
+        /* 特殊價格群組 */
         .price-group-special {
             position: relative;
             text-align: right;
+            /* 不需要額外設定高度，讓它自然與左邊 center 對齊 */
         }
 
         /* $9000 主價格 */
@@ -263,16 +257,16 @@
             font-weight: 600;
             color: var(--text-main);
             margin: 0;
-            line-height: 1.5; /* 與 item-name 行高一致 */
+            line-height: 1.5;
             display: inline-block; 
         }
 
         /* 上方浮動小字：定價 */
         .float-top-text {
             position: absolute;
-            bottom: 100%; /* 緊貼在 $9000 上緣 */
+            bottom: 100%; 
             right: 0;
-            margin-bottom: 0px; /* 微調距離 */
+            margin-bottom: 2px;
             font-size: 12px;
             color: #CCC;
             text-decoration: line-through;
@@ -283,16 +277,15 @@
         /* 下方浮動小字：新年活動價 */
         .float-bottom-text {
             position: absolute;
-            top: 100%; /* 緊貼在 $9000 下緣 */
+            top: 100%; 
             right: 0;
-            margin-top: 0px; /* 微調距離 */
+            margin-top: 2px;
             font-size: 12px;
             color: #999;
             white-space: nowrap;
             line-height: 1.2;
         }
         
-        /* 一般的價格群組（用於補色等其他項目） */
         .price-group-normal {
              display: flex;
              flex-direction: column;
@@ -358,7 +351,6 @@
             color: #555;
         }
 
-        /* 針對 info-detail 內的列表進行樣式調整 */
         .info-detail ul {
             padding-left: 20px;
             margin: 5px 0 10px 0;
@@ -417,7 +409,6 @@
             justify-content: center;
         }
 
-        /* 圖示樣式 */
         .btn-icon {
             width: 24px;
             height: 24px;
@@ -426,8 +417,8 @@
 
         .btn-white {
             background: #fff;
-            color: var(--text-main); /* 黑色文字 #333 */
-            border: 1px solid #E0E0E0; /* 灰色邊框 */
+            color: var(--text-main);
+            border: 1px solid #E0E0E0;
         }
 
         .btn-black {
@@ -476,7 +467,6 @@
             color: var(--text-sub);
         }
 
-        /* 文字頁面通用與英文標題設定 */
         .text-page {
             line-height: 1.8;
             color: var(--text-sub);
@@ -509,7 +499,6 @@
             margin-bottom: 15px;
         }
         
-        /* 列表樣式調整 - 用於新的文字內容 */
         .content-box ul {
             padding-left: 20px;
             margin: 0;
@@ -523,7 +512,6 @@
             margin: 0 0 10px 0;
         }
 
-        /* Q&A 樣式優化 */
         .qa-question {
             font-size: 16px;
             font-weight: 600;
@@ -535,7 +523,7 @@
         .qa-answer {
             font-size: 14px;
             color: #555;
-            margin: 0 0 30px 0; /* Q&A 之間的間距 */
+            margin: 0 0 30px 0;
             line-height: 1.7;
             text-align: justify;
         }
@@ -544,7 +532,6 @@
             margin-bottom: 0;
         }
 
-        /* 外層箭頭旋轉 */
         .accordion-item.open > .accordion-header .arrow-icon {
             transform: rotate(180deg);
         }
@@ -594,9 +581,7 @@
                             
                             <div class="price-group-special">
                                 <span class="float-top-text">定價$10,000</span>
-                                
                                 <span class="current-price">$9,000</span>
-                                
                                 <span class="float-bottom-text">新年活動價</span>
                             </div>
                         </div>
@@ -886,7 +871,7 @@
             <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" y="0" width="24" height="24" rx="5" ry="5" fill="#06C755"/>
                 <path fill="#FFFFFF" d="M12 3.5L5.5 6v5.8c0 4.5 2.8 8.7 6.5 9.7 3.7-1 6.5-5.2 6.5-9.7V6L12 3.5z"/>
-                <path fill="06C755" d="M10.5 9v6h4.5v-1.5H12v-4.5h-1.5z"/>
+                <path fill="#06C755" d="M10.5 9v6h4.5v-1.5H12v-4.5h-1.5z"/>
             </svg>
             我要預約
         </a>
