@@ -11,11 +11,14 @@
 
     <style>
         :root {
+            /* 柔和黑白配色 */
             --bg-color: #FAFAFA;
             --card-bg: #FFFFFF;
             --text-main: #333333;
             --text-sub: #666666;
             --border-color: #E6E6E6;
+            
+            /* 圓角設定 */
             --radius-card: 24px;
             --radius-btn: 50px;
         }
@@ -220,15 +223,14 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            /* 這是讓文字底部對齊的關鍵 */
-            align-items: baseline; 
+            align-items: baseline; /* 讓文字底部基準線對齊 */
             margin-top: 20px;
             position: relative;
         }
 
         /* 特別針對「機器飄眉」的樣式調整 */
         .price-row.special-row {
-            /* 增加上下 margin 是為了給浮動的小字留空間，不影響中間 $9000 的對齊位置 */
+            /* 增加上下 margin 是為了給浮動的小字留空間 */
             margin-top: 35px; 
             margin-bottom: 28px;
         }
@@ -238,7 +240,7 @@
             color: var(--text-main);
             font-weight: 600; 
             margin: 0;
-            line-height: 1.2;
+            line-height: 1.5; /* 統一字體行高 */
         }
 
         /* 價格群組容器 */
@@ -261,8 +263,8 @@
             font-weight: 600;
             color: var(--text-main);
             margin: 0;
-            line-height: 1.2;
-            display: inline-block; /* 確保它是對齊的主體 */
+            line-height: 1.5; /* 與 item-name 行高一致 */
+            display: inline-block; 
         }
 
         /* 上方浮動小字：定價 */
@@ -270,11 +272,12 @@
             position: absolute;
             bottom: 100%; /* 緊貼在 $9000 上緣 */
             right: 0;
-            margin-bottom: 3px;
+            margin-bottom: 0px; /* 微調距離 */
             font-size: 12px;
             color: #CCC;
             text-decoration: line-through;
             white-space: nowrap;
+            line-height: 1.2;
         }
 
         /* 下方浮動小字：新年活動價 */
@@ -282,10 +285,11 @@
             position: absolute;
             top: 100%; /* 緊貼在 $9000 下緣 */
             right: 0;
-            margin-top: 3px;
+            margin-top: 0px; /* 微調距離 */
             font-size: 12px;
             color: #999;
             white-space: nowrap;
+            line-height: 1.2;
         }
         
         /* 一般的價格群組（用於補色等其他項目） */
@@ -422,7 +426,7 @@
 
         .btn-white {
             background: #fff;
-            color: var(--text-main); /* 黑色文字 */
+            color: var(--text-main); /* 黑色文字 #333 */
             border: 1px solid #E0E0E0; /* 灰色邊框 */
         }
 
@@ -590,7 +594,9 @@
                             
                             <div class="price-group-special">
                                 <span class="float-top-text">定價$10,000</span>
+                                
                                 <span class="current-price">$9,000</span>
+                                
                                 <span class="float-bottom-text">新年活動價</span>
                             </div>
                         </div>
