@@ -4,11 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lefty Shaop</title>
-    
-    <meta property="og:title" content="Lefty Shaop">
-    <meta property="og:description" content="半永久紋繡服務價目表、優惠活動、預約須知及術前術後保養資訊。">
-    <meta property="og:type" content="website">
-
     <style>
         :root {
             /* 柔和黑白配色 */
@@ -223,23 +218,14 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: baseline; /* 保持基準線對齊 */
+            align-items: center;
             margin-top: 20px;
-        }
-        
-        /* 特別針對「機器飄眉」的樣式調整 */
-        .price-row.special-row {
-            margin-top: 28px;
-            margin-bottom: 22px;
         }
 
         .item-name {
             font-size: 15px;
             color: var(--text-main);
             font-weight: 600; 
-            padding: 0;
-            margin: 0;
-            line-height: 1.5;
         }
 
         .price-group {
@@ -249,48 +235,17 @@
             text-align: right;
         }
 
-        /* 特殊價格群組：使用相對定位 */
-        .price-group-special {
-            position: relative;
-            display: block;
+        .original-price {
+            font-size: 12px;
+            color: #CCC;
+            text-decoration: line-through;
+            margin-bottom: 4px;
         }
 
-        /* 一般價格樣式 */
         .current-price {
             font-size: 15px; 
             font-weight: 600;
             color: var(--text-main);
-            margin: 0;
-            line-height: 1.5;
-            display: block;
-        }
-
-        /* 上方浮動小字：定價 */
-        .float-top-text {
-            position: absolute;
-            top: -18px;
-            right: 0;
-            font-size: 12px;
-            color: #CCC;
-            text-decoration: line-through;
-            white-space: nowrap;
-        }
-
-        /* 下方浮動小字：新年活動價 */
-        .float-bottom-text {
-            position: absolute;
-            bottom: -18px;
-            right: 0;
-            font-size: 12px;
-            color: #999;
-            white-space: nowrap;
-        }
-        
-        /* 一般的價格群組（用於補色等其他項目） */
-        .price-group-normal {
-             display: flex;
-             flex-direction: column;
-             align-items: flex-end;
         }
 
         .note-box {
@@ -428,13 +383,6 @@
             background: #fff;
             color: var(--text-main);
             border: 1px solid #E0E0E0;
-        }
-
-        /* 新增：LINE 專用綠色按鈕樣式 */
-        .btn-line-green {
-            background: #fff;
-            color: #06C755; /* LINE 官方綠色 */
-            border: 1px solid #06C755; /* 邊框也改成綠色比較好看 */
         }
 
         .btn-base:active {
@@ -589,16 +537,11 @@
                 </div>
                 <div class="accordion-content">
                     <div class="content-inner">
-                        
-                        <div class="price-row special-row">
+                        <div class="price-row">
                             <span class="item-name">機器飄眉</span>
-                            
-                            <div class="price-group-special">
-                                <span class="float-top-text">定價$10,000</span>
-                                
-                                <span class="current-price">$9,000</span>
-                                
-                                <span class="float-bottom-text">新年活動價</span>
+                            <div class="price-group">
+                                <span class="original-price">定價$10,000</span>
+                                <span class="current-price">活動價$9,000</span>
                             </div>
                         </div>
                         
@@ -625,7 +568,7 @@
                                         <li><b>仿真毛流</b>：宛如原生眉毛的細緻線條，素顏也能很有精神</li>
                                         <li><b>輕柔操作</b>：技術手法取代傳統方式，怕痛的你也能安心變美變帥</li>
                                         <li><b>零修復期</b>：做完即自然，隔天即可上班</li>
-                                        <li><b>全部膚質</b>：任何肌膚皆適用，留色度好</li>
+                                        <li><b>全膚質</b>：任何肌膚皆適用，留色度好</li>
                                     </ul>
                                 </div>
                             </div>
@@ -670,15 +613,15 @@
                         </div>
                         <div class="price-row">
                             <span class="item-name">一年以內</span>
-                            <div class="price-group-normal"><span class="current-price">$3,000</span></div>
+                            <div class="price-group"><span class="current-price">$3,000</span></div>
                         </div>
                         <div class="price-row">
                             <span class="item-name">一年至二年</span>
-                            <div class="price-group-normal"><span class="current-price">$6,000</span></div>
+                            <div class="price-group"><span class="current-price">$6,000</span></div>
                         </div>
                         <div class="price-row">
                             <span class="item-name">兩年以後</span>
-                            <div class="price-group-normal"><span class="current-price">原定價計算</span></div>
+                            <div class="price-group"><span class="current-price">原定價計算</span></div>
                         </div>
                     </div>
                 </div>
@@ -699,7 +642,7 @@
                     <div class="content-inner">
                         <div class="price-row">
                             <span class="item-name">單次操作</span>
-                            <div class="price-group-normal"><span class="current-price">$1,500</span></div>
+                            <div class="price-group"><span class="current-price">$1,500</span></div>
                         </div>
                         <div class="info-actions">
                             <div class="info-item">
@@ -883,7 +826,7 @@
             更多作品
         </a>
         
-        <a href="https://lin.ee/Vk7LSzC" target="_blank" class="btn-base btn-line-green">
+        <a href="https://lin.ee/Vk7LSzC" target="_blank" class="btn-base btn-black">
             <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" y="0" width="24" height="24" rx="5" ry="5" fill="#06C755"/>
                 <path fill="#FFFFFF" d="M12 3.5L5.5 6v5.8c0 4.5 2.8 8.7 6.5 9.7 3.7-1 6.5-5.2 6.5-9.7V6L12 3.5z"/>
