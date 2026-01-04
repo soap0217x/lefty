@@ -218,9 +218,17 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            /* 改回 center，利用右側上下對稱來達成中間對齊 */
             align-items: center; 
             margin-top: 20px;
+        }
+        
+        /* 特別針對「機器飄眉」的樣式調整 
+           使用 Margin 撐開空間，讓絕對定位的文字不會重疊
+        */
+        .price-row.special-row {
+            margin-top: 28px;    /* 增加上方空間給定價 */
+            margin-bottom: 22px; /* 增加下方空間給活動說明 */
+            align-items: center; /* 強制垂直置中 */
         }
 
         .item-name {
@@ -229,6 +237,7 @@
             font-weight: 600; 
             padding: 0;
             margin: 0;
+            line-height: 1.5; /* 統一字體行高 */
         }
 
         .price-group {
@@ -238,29 +247,55 @@
             text-align: right;
         }
 
-        /* 上方小字：定價 */
-        .original-price {
-            font-size: 12px;
-            color: #CCC;
-            text-decoration: line-through;
-            margin-bottom: 2px; /* 縮小間距讓結構更緊湊 */
+        /* 特殊價格群組：使用相對定位 
+           讓內部的「定價」與「活動價」可以浮動
+        */
+        .price-group-special {
+            position: relative;
+            display: block; /* 改為區塊，依靠絕對定位 */
         }
 
-        /* 中間大字：$9,000 */
+        /* 一般價格樣式 */
         .current-price {
             font-size: 15px; 
             font-weight: 600;
             color: var(--text-main);
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.5; /* 與 item-name 相同 */
+            display: block;
         }
 
-        /* 下方小字：新年活動價 */
-        .promo-desc {
+        /* 上方浮動小字：定價 */
+        .float-top-text {
+            position: absolute;
+            top: -18px; /* 往上浮動 */
+            right: 0;
             font-size: 12px;
-            color: #999; /* 使用次要文字顏色 */
-            margin-top: 2px; /* 與上方 margin-bottom 對稱 */
+            color: #CCC;
+            text-decoration: line-through;
+            white-space: nowrap;
         }
+
+        /* 下方浮動小字：新年活動價 */
+        .float-bottom-text {
+            position: absolute;
+            bottom: -18px; /* 往下浮動 */
+            right: 0;
+            font-size: 12px; /* 跟上方定價一樣大 */
+            color: #999;
+            white-space: nowrap;
+        }
+        
+        /* 一般的價格群組（用於補色等其他項目） */
+        .price-group-normal {
+             display: flex;
+             flex-direction: column;
+             align-items: flex-end;
+        }
+        .price-group-normal .current-price {
+            /* 保持原樣 */
+        }
+
 
         .note-box {
             background-color: #F8F8F8;
@@ -551,12 +586,16 @@
                 </div>
                 <div class="accordion-content">
                     <div class="content-inner">
-                        <div class="price-row">
+                        
+                        <div class="price-row special-row">
                             <span class="item-name">機器飄眉</span>
-                            <div class="price-group">
-                                <span class="original-price">定價$10,000</span>
+                            
+                            <div class="price-group-special">
+                                <span class="float-top-text">定價$10,000</span>
+                                
                                 <span class="current-price">$9,000</span>
-                                <span class="promo-desc">新年活動價</span>
+                                
+                                <span class="float-bottom-text">新年活動價</span>
                             </div>
                         </div>
                         
@@ -628,15 +667,15 @@
                         </div>
                         <div class="price-row">
                             <span class="item-name">一年以內</span>
-                            <div class="price-group"><span class="current-price">$3,000</span></div>
+                            <div class="price-group-normal"><span class="current-price">$3,000</span></div>
                         </div>
                         <div class="price-row">
                             <span class="item-name">一年至二年</span>
-                            <div class="price-group"><span class="current-price">$6,000</span></div>
+                            <div class="price-group-normal"><span class="current-price">$6,000</span></div>
                         </div>
                         <div class="price-row">
                             <span class="item-name">兩年以後</span>
-                            <div class="price-group"><span class="current-price">原定價計算</span></div>
+                            <div class="price-group-normal"><span class="current-price">原定價計算</span></div>
                         </div>
                     </div>
                 </div>
@@ -657,7 +696,7 @@
                     <div class="content-inner">
                         <div class="price-row">
                             <span class="item-name">單次操作</span>
-                            <div class="price-group"><span class="current-price">$1,500</span></div>
+                            <div class="price-group-normal"><span class="current-price">$1,500</span></div>
                         </div>
                         <div class="info-actions">
                             <div class="info-item">
