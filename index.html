@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lefty Shaop</title>
+    
+    <meta property="og:title" content="Lefty Shaop">
+    <meta property="og:description" content="半永久紋繡服務價目表、優惠活動、預約須知及術前術後保養資訊。">
+    <meta property="og:type" content="website">
+
     <style>
         :root {
             /* 柔和黑白配色 */
@@ -218,7 +223,7 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center; 
+            align-items: baseline; /* 修改：改為基準線對齊，確保文字底部平行 */
             margin-top: 20px;
         }
         
@@ -228,7 +233,7 @@
         .price-row.special-row {
             margin-top: 28px;    /* 增加上方空間給定價 */
             margin-bottom: 22px; /* 增加下方空間給活動說明 */
-            align-items: center; /* 強制垂直置中 */
+            /* 修改：移除 align-items: center，繼承 baseline 對齊 */
         }
 
         .item-name {
@@ -292,10 +297,6 @@
              flex-direction: column;
              align-items: flex-end;
         }
-        .price-group-normal .current-price {
-            /* 保持原樣 */
-        }
-
 
         .note-box {
             background-color: #F8F8F8;
@@ -968,3 +969,4 @@
     </script>
 </body>
 </html>
+
