@@ -315,7 +315,7 @@
         
         .info-detail li {
             margin-bottom: 5px;
-            list-style-type: disc; /* 強制實心黑點 */
+            list-style-type: disc;
         }
 
         .info-detail.show {
@@ -472,6 +472,27 @@
             margin: 0 0 10px 0;
         }
 
+        /* Q&A 樣式優化 */
+        .qa-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+        }
+        
+        .qa-answer {
+            font-size: 14px;
+            color: #555;
+            margin: 0 0 30px 0; /* Q&A 之間的間距 */
+            line-height: 1.7;
+            text-align: justify;
+        }
+
+        .qa-answer:last-child {
+            margin-bottom: 0;
+        }
+
         /* 外層箭頭旋轉 */
         .accordion-item.open > .accordion-header .arrow-icon {
             transform: rotate(180deg);
@@ -488,6 +509,8 @@
             <div class="nav-item" onclick="switchTab('prep')">術前準備</div>
             <div class="nav-item" onclick="switchTab('care')">術後保養</div>
             <div class="nav-item" onclick="switchTab('payment')">支付方式</div>
+            <div class="nav-item" onclick="switchTab('qa-brows')">飄眉 Q&A</div>
+            <div class="nav-item" onclick="switchTab('qa-removal')">除色 Q&A</div>
         </div>
     </div>
 
@@ -673,6 +696,55 @@
         </div>
     </div>
 
+    <div id="tab-qa-brows" class="tab-content">
+        <div class="text-page">
+            <h3>機器飄眉 Q&A <span class="en-title">Hairstroke QA</span></h3>
+            
+            <div class="content-box">
+                <h4 class="qa-question">Q1：什麼是「機器飄眉」？跟傳統霧眉有什麼不一樣？</h4>
+                <div class="qa-answer">
+                    A： 最大的差別在於「毛流感」。<br>
+                    霧眉像刷了眉粉，有妝感；而機器飄眉則是模擬原本眉毛的生長方向，做出一根一根的線條。它的效果非常輕盈蓬鬆，就像天生眉毛變濃密了一樣，非常適合追求「偽素顏」或不喜歡妝感太重的人（男生也非常適合！）。
+                </div>
+
+                <h4 class="qa-question">Q2：做完會像「蠟筆小新」一樣又黑又粗嗎？</h4>
+                <div class="qa-answer">
+                    A： 請放心，完全不會！機器飄眉的創傷極小，剛做完就會是非常自然的線條感。恢復期沒有尷尬的結厚痂期，只會有像皮屑般的薄痂脫落，修復過程身邊的人幾乎看不出來，您可以照常上班、約會。
+                </div>
+
+                <h4 class="qa-question">Q3：可以維持多久？</h4>
+                <div class="qa-answer">
+                    A： 根據個人的膚質代謝與保養習慣，通常可以維持 1.5 至 2 年（甚至更久）。顏色會隨著時間慢慢變淡，不會變成奇怪的藍色或紅色。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab-qa-removal" class="tab-content">
+        <div class="text-page">
+            <h3>無創除色 Q&A <span class="en-title">Removal QA</span></h3>
+            
+            <div class="content-box">
+                <h4 class="qa-question">Q1：什麼是「無創除色」？真的不會破皮嗎？</h4>
+                <div class="qa-answer">
+                    A： 是的，真的不破皮、不流血。<br>
+                    我們利用光學物理原理與特定波長，直接擊碎皮膚下的色素，讓身體自然代謝排出。因為表皮沒有傷口，所以術後完全沒有修復期，不需要貼人工皮，甚至剛做完就可以立刻畫眉毛出門！
+                </div>
+
+                <h4 class="qa-question">Q2：除色會把原本的眉毛燒焦嗎？</h4>
+                <div class="qa-answer">
+                    A： 不會的。<br>
+                    無創除色技術能夠精準識別色素，只針對殘留的色料作用，不會傷害到您的毛囊與原生毛髮。您的眉毛依然會健康生長，請不用擔心變成「無眉道人」。
+                </div>
+
+                <h4 class="qa-question">Q3：需要除幾次才能乾淨？</h4>
+                <div class="qa-answer">
+                    A： 這取決於您舊眉毛的「卡色深度」與「色料性質」。如果是顏色較淺的紅眉或霧眉，可能 1-2 次就有明顯改善。如果是傳統紋繡（藍眉）或入針較深，次數就會需要比較多。
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="tab-notice" class="tab-content">
         <div class="text-page">
             <h3>預約須知 <span class="en-title">Booking Policy</span></h3>
@@ -758,7 +830,7 @@
             <svg class="btn-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <rect x="0" y="0" width="24" height="24" rx="5" ry="5" fill="#06C755"/>
                 <path fill="#FFFFFF" d="M12 3.5L5.5 6v5.8c0 4.5 2.8 8.7 6.5 9.7 3.7-1 6.5-5.2 6.5-9.7V6L12 3.5z"/>
-                <path fill="#06C755" d="M10.5 9v6h4.5v-1.5H12v-4.5h-1.5z"/>
+                <path fill="06C755" d="M10.5 一個9v6h4.5v-1.5H12v-4.5h-1.5z"/>
             </svg>
             我要預約
         </a>
@@ -771,13 +843,17 @@
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
             const navItems = document.querySelectorAll('.nav-item');
+            
+            // 更新映射表，加入新的 Q&A 分頁
             const navMap = { 
                 'price': 0, 
                 'promo': 1, 
                 'notice': 2, 
                 'prep': 3, 
                 'care': 4, 
-                'payment': 5 
+                'payment': 5,
+                'qa-brows': 6,
+                'qa-removal': 7
             };
             
             if (navItems[navMap[tabName]]) {
