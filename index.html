@@ -218,7 +218,8 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            /* 修改處：從 center 改為 flex-end，讓名字對齊最下方的價格 */
+            align-items: flex-end; 
             margin-top: 20px;
         }
 
@@ -226,6 +227,8 @@
             font-size: 15px;
             color: var(--text-main);
             font-weight: 600; 
+            /* 微調：稍微增加一點底部間距，讓它跟價格的基線對得更準（視字體而定） */
+            padding-bottom: 2px;
         }
 
         .price-group {
@@ -914,4 +917,3 @@
     </script>
 </body>
 </html>
-
