@@ -6,7 +6,7 @@
     <title>Lefty Shaop</title>
     
     <meta property="og:title" content="Lefty Shaop">
-    <meta property="og:description" content="半永久紋繡服務價目表、優惠活動、預約須知及術前術後保養資訊。">
+    <meta property="og:description" content="">
     <meta property="og:type" content="website">
 
     <style>
@@ -223,9 +223,8 @@
 
         /* 特別針對「機器飄眉」的樣式調整 */
         .price-row.special-row {
-            /* 上方留白給定價，下方不需要太多了，因為活動價移到旁邊了 */
             margin-top: 35px; 
-            margin-bottom: 15px;
+            margin-bottom: 28px;
         }
 
         .item-name {
@@ -249,11 +248,11 @@
             position: relative;
             text-align: right;
             transform: translateY(-4px); 
-            /* 使用 Flexbox 讓 9000 和 新年活動價 排在同一行 */
+            /* 使用 Flexbox 讓內容橫向排列 */
             display: flex;
             align-items: baseline;
             justify-content: flex-end;
-            gap: 6px; /* 兩個文字之間的間距 */
+            gap: 6px; 
         }
 
         /* $9000 主價格 */
@@ -268,7 +267,7 @@
         /* 上方浮動小字：定價 */
         .float-top-text {
             position: absolute;
-            bottom: 100%; /* 貼在上方 */
+            bottom: 100%; 
             right: 0;
             margin-bottom: 2px;
             font-size: 12px;
@@ -283,7 +282,6 @@
             font-size: 12px;
             color: #999;
             white-space: nowrap;
-            /* 保持在同一行顯示 */
         }
         
         .price-group-normal {
@@ -581,8 +579,9 @@
                             
                             <div class="price-group-special">
                                 <span class="float-top-text">定價$10,000</span>
-                                <span class="current-price">$9,000</span>
+                                
                                 <span class="side-promo-text">新年活動價</span>
+                                <span class="current-price">$9,000</span>
                             </div>
                         </div>
                         
