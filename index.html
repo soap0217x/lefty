@@ -225,7 +225,6 @@
         .item-name {
             font-size: 15px;
             color: var(--text-main);
-            /* 修改這裡：加粗字體，跟價格數字一樣 */
             font-weight: 600; 
         }
 
@@ -370,9 +369,9 @@
         }
 
         .btn-black {
-            background: #fff; /* 改成白色 */
-            color: var(--text-main); /* 字改成深色 */
-            border: 1px solid #E0E0E0; /* 加上淺灰邊框 */
+            background: #fff;
+            color: var(--text-main);
+            border: 1px solid #E0E0E0;
         }
 
         .btn-base:active {
@@ -448,8 +447,18 @@
             margin-bottom: 15px;
         }
         
-        .content-box p {
+        /* 列表樣式調整 - 用於新的文字內容 */
+        .content-box ul {
+            padding-left: 20px;
             margin: 0;
+        }
+        
+        .content-box li {
+            margin-bottom: 8px;
+        }
+        
+        .content-box p {
+            margin: 0 0 10px 0;
         }
 
         /* 外層箭頭旋轉 */
@@ -653,9 +662,22 @@
         <div class="text-page">
             <h3>預約須知 <span class="en-title">Booking Policy</span></h3>
             <div class="content-box">
-                <p>1. 請務必準時抵達。<br>
-                   2. 若需改期請於兩天前告知。<br>
-                   3. 孕婦、蟹足腫體質請事先諮詢。</p>
+                <ul style="margin-bottom: 25px;">
+                   <li>預約需年滿 18 歲以上。</li>
+                   <li>心臟病、高血壓、糖尿病、哺乳中、月經期、蟹足腫體質、免疫系統疾病、懷孕期等狀況，請先自行評估並謹慎考量是否適合操作。</li>
+                   <li>愛滋病、活動性皮膚病、性病、肝炎等傳染性疾病患者不得操作。</li>
+                </ul>
+
+                <div style="border-top: 1px dashed #eee; padding-top: 20px;">
+                    <strong style="color: var(--text-main); display: block; margin-bottom: 12px; font-size: 16px;">臉部近期醫美操作提醒：</strong>
+                    <ul style="font-size: 14px; color: #555; list-style-type: circle;">
+                        <li>玻尿酸、肉毒注射 、手術 → 至少間隔 1 個月再預約</li>
+                        <li>雷射、換膚、酸類治療 → 至少間隔 1 個月再預約</li>
+                        <li>服用抗凝血藥物（阿司匹林、魚油、維生素 E 等） → 預約前至少停用 7 天以上</li>
+                        <li>眉毛區有痘痘、皮膚過敏、濕疹或發炎 → 必須痊癒後才能操作</li>
+                        <li>使用 A 酸（口服/外用） → 評估皮膚狀況後決定是否可操作</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -664,9 +686,11 @@
         <div class="text-page">
             <h3>術前準備 <span class="en-title">Pre-care Instructions</span></h3>
              <div class="content-box">
-                <p>1. 操作前一週請勿進行酸類煥膚。<br>
-                   2. 前一晚請避免飲酒，保持充足睡眠。<br>
-                   3. 可先畫好喜歡的眉型前來討論。</p>
+                <ul>
+                    <li>前一晚避免飲酒，保持充足睡眠。</li>
+                    <li>操作前一週請勿進行酸類煥膚、凝血藥物（阿司匹林、魚油、維生素 E 等）。</li>
+                    <li>可先畫好喜歡的眉型前來討論。</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -674,10 +698,26 @@
     <div id="tab-care" class="tab-content">
         <div class="text-page">
             <h3>術後保養 <span class="en-title">After-care Instructions</span></h3>
+             
              <div class="content-box">
-                <p>1. 術後4小時內請勿碰水。<br>
-                   2. 結痂期間4-7天請勿摳抓，可用乾紙巾輕拍。<br>
-                   3. 每日早晚使用修復霜薄擦。</p>
+                <h4 style="font-size: 16px; margin: 0 0 15px 0; color: #333; font-weight: 600;">保養重點</h4>
+                <ul style="margin-bottom: 10px;">
+                    <li>洗完臉或洗完澡後使用紙巾輕輕將眉毛部位擦乾，使眉毛保持乾燥。</li>
+                    <li>含酒精、A酸成分的保養品及粉底或BB 霜、去角質成份請勿上到眉毛，會使整體眉毛顏色變灰或青，最好化完妝後用棉籤擦乾淨。</li>
+                    <li>修復期不宜曝曬陽光或紫外線直射，易導致眉毛留色發藍。</li>
+                    <li>主要保持眉毛乾淨、乾燥即可。</li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h4 style="font-size: 16px; margin: 0 0 15px 0; color: #333; font-weight: 600;">注意事項</h4>
+                <ul>
+                    <li>保持眉毛乾燥，施術後四小時內眉毛不要碰水。</li>
+                    <li>可正常洗臉，但洗面乳等清潔用品、化妝水與保養品等需避開眉毛局部一週左右，碰到水請拿紙巾將水分壓乾，不可用力擦拭，小心按壓即可！</li>
+                    <li>傷口癒合時眉毛皮膚有結痂均屬正常現象，會癢的話，拿紙巾輕壓，<b>嚴禁用手摳落痂皮！</b>防止眉上色料同時被摳落導致留色不佳，請讓痂皮自然脫落（一般3-7日左右）。</li>
+                    <li>脫痂前禁止游泳、溫泉、桑拿等泡水、蒸氣、劇烈流汗的活動。</li>
+                    <li>結痂後會因每個人新陳代謝、術後保養、年齡階段與皮膚性質不同而有不同的掉色狀況，脫痂後顏色變淡、甚至無色，均屬正常不需擔心，等待回來店裡，視留色狀況補色即可！</li>
+                </ul>
             </div>
         </div>
     </div>
