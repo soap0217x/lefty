@@ -218,8 +218,8 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            /* 強制靠底對齊 */
-            align-items: flex-end; 
+            /* 改回 center，利用右側上下對稱來達成中間對齊 */
+            align-items: center; 
             margin-top: 20px;
         }
 
@@ -227,8 +227,6 @@
             font-size: 15px;
             color: var(--text-main);
             font-weight: 600; 
-            /* 設定相同行高以確保與價格對齊 */
-            line-height: 1.4;
             padding: 0;
             margin: 0;
         }
@@ -238,25 +236,30 @@
             flex-direction: column;
             align-items: flex-end;
             text-align: right;
-            padding: 0;
-            margin: 0;
         }
 
+        /* 上方小字：定價 */
         .original-price {
             font-size: 12px;
             color: #CCC;
             text-decoration: line-through;
-            margin-bottom: 4px;
-            line-height: 1.2;
+            margin-bottom: 2px; /* 縮小間距讓結構更緊湊 */
         }
 
+        /* 中間大字：$9,000 */
         .current-price {
             font-size: 15px; 
             font-weight: 600;
             color: var(--text-main);
-            /* 設定相同行高以確保與名稱對齊 */
-            line-height: 1.4;
             margin: 0;
+            line-height: 1.4;
+        }
+
+        /* 下方小字：新年活動價 */
+        .promo-desc {
+            font-size: 12px;
+            color: #999; /* 使用次要文字顏色 */
+            margin-top: 2px; /* 與上方 margin-bottom 對稱 */
         }
 
         .note-box {
@@ -552,7 +555,8 @@
                             <span class="item-name">機器飄眉</span>
                             <div class="price-group">
                                 <span class="original-price">定價$10,000</span>
-                                <span class="current-price">活動價$9,000</span>
+                                <span class="current-price">$9,000</span>
+                                <span class="promo-desc">新年活動價</span>
                             </div>
                         </div>
                         
