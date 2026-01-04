@@ -218,7 +218,7 @@
         .price-row {
             display: flex;
             justify-content: space-between;
-            /* 修改處：從 center 改為 flex-end，讓名字對齊最下方的價格 */
+            /* 強制靠底對齊 */
             align-items: flex-end; 
             margin-top: 20px;
         }
@@ -227,8 +227,10 @@
             font-size: 15px;
             color: var(--text-main);
             font-weight: 600; 
-            /* 微調：稍微增加一點底部間距，讓它跟價格的基線對得更準（視字體而定） */
-            padding-bottom: 2px;
+            /* 設定相同行高以確保與價格對齊 */
+            line-height: 1.4;
+            padding: 0;
+            margin: 0;
         }
 
         .price-group {
@@ -236,6 +238,8 @@
             flex-direction: column;
             align-items: flex-end;
             text-align: right;
+            padding: 0;
+            margin: 0;
         }
 
         .original-price {
@@ -243,12 +247,16 @@
             color: #CCC;
             text-decoration: line-through;
             margin-bottom: 4px;
+            line-height: 1.2;
         }
 
         .current-price {
             font-size: 15px; 
             font-weight: 600;
             color: var(--text-main);
+            /* 設定相同行高以確保與名稱對齊 */
+            line-height: 1.4;
+            margin: 0;
         }
 
         .note-box {
